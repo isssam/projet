@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Client = mongoose.model('Client');
+var User = mongoose.model('User');
 
 
 
@@ -10,37 +10,37 @@ var fs = require('fs');
 exports.addItem = function(req, res) {
 	// console.log(req.files);
 
-	var clientData = JSON.parse(req.body.clientData);
+	var UserData = JSON.parse(req.body.userData);
 	
 
 	
-						var newClient = new Client();
-						newClient.fullName = clientData.fullName;
-						newClient.email = clientData.email;
-						newClient.login = clientData.login;
+						var newUser = new User();
+						newUser.fullName = userData.fullName;
+						newUser.email = userData.email;
+						newUser.login = userData.login;
 					
-						newClient.save(function(err) {
+						newUser.save(function(err) {
 							if (err) {
 								console.log(err);
 								throw err;
 							} else {
-								/*global.io.sockets.emit('newClientNotification', {
-									lastItem: newClient
+								/*global.io.sockets.emit('newuserNotification', {
+									lastItem: newuser
 								});*/
-								console.log('sending result to client');
+								console.log('sending result to user');
 								return res.jsonp(200, {
 									'code': 1,
-									'message': 'un nouveau client a ete ajouter'
+									'message': 'un nouveau user a ete ajouter'
 								});
 							}
 						});
 };
 /**
- * Supprimer un client
+ * Supprimer un user
  */
 exports.remove = function(req, res) {
-  var client = new Client(req.body.deleteClient);
-  client.findById(client._id, function(err, item) {
+  var user = new User(req.body.deleteUser);
+  user.findById(user._id, function(err, item) {
     if (err) {
       res.send({
         'result': 'error'
@@ -62,26 +62,24 @@ exports.remove = function(req, res) {
 
 
 /**
- * Editer un client
+ * Editer un user
  */
 exports.update = function(req, res) {
-  var clientData = JSON.parse(req.body.clientData);
-  var client = new Client(clientData.client);
+  var userData = JSON.parse(req.body.userData);
+  var user = new User(userData.user);
 
   
 
-  Client.findById(client._id, function(err, item) {
+  User.findById(user._id, function(err, item) {
     if (err) {
       res.send({
         'result': 'error'
       });
     } else {
-      item.libelle = client.libelle;
-      item.niveau = client.niveau;
-      item.position = client.position;
-      if (client.picto) {
-        item.picto = client.picto;
-      }
+   			newUser.fullName = userData.fullName;
+			newUser.email = userData.email;
+			newUser.login = userData.login;
+      
       item.save(function(err) {
         if (err) {
           res.send({
@@ -96,35 +94,35 @@ exports.update = function(req, res) {
   });
 };
 
-exports.getAllClients = function(req, res) {
+exports.getAllUsers = function(req, res) {
 
 
 
-	Client.find({}, function(err, clients) {
+	User.find({}, function(err, users) {
 		if (err) {
 			return res.jsonp(500, {
 				'code': -1,
 				'message': 'Erreur lors de la recuperation'
 			});
 		} else {
-			return res.jsonp(200, clients);
+			return res.jsonp(200, users);
 		}
 	});
 };
 
 
 exports.findById = function(req, res) {
-	var id = req.body.idClient;
-	Client
+	var id = req.body.idUser;
+	User
 		.findById(id)
 		
-		.exec(function(err, client) {
+		.exec(function(err, user) {
 			if (err) {
 				return res.jsonp(400, {
-					'client': 'une erreur innatendu '
+					'user': 'une erreur innatendu '
 				});
 			} else {
-				return res.jsonp(200, client);
+				return res.jsonp(200, user);
 			}
 		});
 };

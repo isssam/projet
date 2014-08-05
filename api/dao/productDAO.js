@@ -11,13 +11,11 @@ exports.addItem = function(req, res) {
 	// console.log(req.files);
 
 	var productData = JSON.parse(req.body.productData);
-	
-
-	
+		
 						var newProduct = new Product();
-						newProduct.name = productData.name;
-						newProduct.categorie = productData.categorie;
-						newProduct.description = productData.description;
+						newProduct.libelle = libelle;
+						newProduct.category = category;
+						newProduct.description = description;
 					
 						newProduct.save(function(err) {
 							if (err) {
@@ -66,8 +64,6 @@ exports.update = function(req, res) {
   var productData = JSON.parse(req.body.productData);
   var product = new Product(productData.product);
 
-  
-
   Product.findById(product._id, function(err, item) {
     if (err) {
       res.send({
@@ -75,11 +71,9 @@ exports.update = function(req, res) {
       });
     } else {
       item.libelle = product.libelle;
-      item.niveau = product.niveau;
-      item.position = product.position;
-      if (product.picto) {
-        item.picto = product.picto;
-      }
+      item.category = product.category;
+      item.description = product.description;
+      
       item.save(function(err) {
         if (err) {
           res.send({
@@ -94,13 +88,7 @@ exports.update = function(req, res) {
   });
 };
 
-
-
-
-
 exports.getAllProducts = function(req, res) {
-
-
 
 	Product.find({}, function(err, products) {
 		if (err) {
