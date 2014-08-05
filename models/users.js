@@ -10,7 +10,7 @@ var clientSchema = mongoose.Schema({
         email        : String,
         password     : String,
         fullName     : String,
-        login        : String
+        login        : String,
         role         : String
     
 

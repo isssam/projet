@@ -10,13 +10,13 @@ var fs = require('fs');
 exports.addItem = function(req, res) {
 	// console.log(req.files);
 
-	var productData = JSON.parse(req.body.productData);
-		
+//	var productData = JSON.parse(req.body.productData);
+
 						var newProduct = new Product();
-						newProduct.libelle = libelle;
-						newProduct.category = category;
-						newProduct.description = description;
-					
+						newProduct.libelle = req.body.libelle;
+						newProduct.category = req.body.category;
+						newProduct.description = req.body.description;
+
 						newProduct.save(function(err) {
 							if (err) {
 								console.log(err);
