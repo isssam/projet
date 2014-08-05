@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
 		res.send(200, req.body);
 	});
 
-	app.post('/ajouterProduit', multipartMiddleware, productDAO.addItem);
+	app.post('/ajouterProduit',  productDAO.addItem);
 	app.post('/getAllProducts', productDAO.getAllProducts);
 	app.post('/getProductsById', productDAO.findById);
 
