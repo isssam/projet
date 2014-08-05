@@ -9,10 +9,10 @@ var Schema = mongoose.Schema,
 var complaintSchema = mongoose.Schema({
 
     name: String,
-    categorie: String,
+    category: String,
     description: String,
     
-    status: {
+   /* status: {
         type: Number,
         default: 0
 
@@ -31,11 +31,8 @@ var complaintSchema = mongoose.Schema({
     createdby: [{
         type: ObjectId,
         ref: 'Clients'
-    }]
-    treatedby: [{
-        type: ObjectId,
-        ref: 'Technicans'
-    }]
+    }]*/
+   
 });
 
 

@@ -6,22 +6,28 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 // define the schema for our user model
-var productSchema = mongoose.Schema({
+var RUSSchema = mongoose.Schema({
 
-    libelle: String,
-    category: String,
-    description: String,
-   
-   
-    created: {
+    
+    operation: {
         type: Date,
         default: Date.now
     },
-    complaint: [{
+    
+    idUser: {
+        type: ObjectId,
+        ref: 'users'
+    }
+    idComplaint: {
         type: ObjectId,
         ref: 'Complaints'
-    }]
+    }
+    idStatus: {
+        type: ObjectId,
+        ref: 'Status'
+    }
+   
 });
 
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('RUS', complaintSchema);
