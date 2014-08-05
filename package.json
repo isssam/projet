@@ -1,7 +1,9 @@
 {
   "name": "projet",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.7.4"
+  },
   "devDependencies": {
     "grunt": "^0.4.1",
     "grunt-autoprefixer": "^0.7.3",
