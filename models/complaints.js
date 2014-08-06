@@ -8,9 +8,9 @@ var Schema = mongoose.Schema,
 // define the schema for our user model
 var complaintSchema = mongoose.Schema({
 
-    name: String,
+    libelle: String,
     category: String,
-    description: String,
+    description: String
     
    /* status: {
         type: Number,

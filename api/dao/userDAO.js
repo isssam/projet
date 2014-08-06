@@ -14,6 +14,8 @@ exports.addItem = function (req, res) {
     newUser.email = req.body.email;
     newUser.login = req.body.login;
 
+
+
     newUser.save(function (err) {
         if (err) {
             console.log(err);
@@ -70,7 +72,7 @@ exports.update = function (req, res) {
             newUser.fullName = userData.fullName;
             newUser.email = userData.email;
             newUser.login = userData.login;
-
+            newUser.role = req.body.login;
             item.save(function (err) {
                 if (err) {
                     res.send({

@@ -9,9 +9,9 @@ module.exports = function(app, passport) {
 	var multipart = require('connect-multiparty');
 	var multipartMiddleware = multipart();
 
-	// var userDAO = require('../api/dao/userDAO');
-	var productDAO = require('../api/dao/productDAO');
 
+	var productDAO = require('../api/dao/productDAO');
+    var userDAO = require('../api/dao/userDAO');
 	//passport service check if user is loged
 	function isLoggedIn(req, res, next) {
 
@@ -35,6 +35,10 @@ module.exports = function(app, passport) {
 	app.post('/ajouterProduit',  productDAO.addItem);
 	app.post('/getAllProducts', productDAO.getAllProducts);
 	app.post('/getProductsById', productDAO.findById);
+
+    app.post('/ajouterUser',  productDAO.addItem);
+    app.post('/getAllUser', productDAO.getAllUsers);
+    app.post('/getUserById', productDAO.findById);
 
 	//service passport
 	//passport service signin

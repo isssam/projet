@@ -9,18 +9,14 @@ var statusSchema = mongoose.Schema({
 
      
 	status: {
-        type: Number,
-        default: 0
+        type: String,
+        default: 'NOUVEAU'
 
-    },
-    validated: {
-        type: Boolean,
-        default: false
-    },
+    }
     
 });
 
 
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Status',clientSchema);
+module.exports = mongoose.model('Status',statusSchema);

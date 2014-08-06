@@ -9,7 +9,7 @@ var Schema = mongoose.Schema,
 var RUSSchema = mongoose.Schema({
 
     
-    operation: {
+    dateOperation: {
         type: Date,
         default: Date.now
     },
@@ -17,14 +17,18 @@ var RUSSchema = mongoose.Schema({
     idUser: {
         type: ObjectId,
         ref: 'users'
-    }
+    },
     idComplaint: {
         type: ObjectId,
         ref: 'Complaints'
-    }
+    },
     idStatus: {
-        type: ObjectId,
-        ref: 'Status'
+        type: String,
+        default: 'New'
+    },
+    commenter: {
+        type: String,
+        default: ''
     }
    
 });
