@@ -49,7 +49,8 @@ app.use(express.static('./app'));
 // Bootstrap models
 require('./models/users');
 require('./models/product');
-
+require('./models/complaints');
+require('./models/CUS');
 
 //services route
 

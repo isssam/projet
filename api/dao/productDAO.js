@@ -37,7 +37,7 @@ exports.addItem = function(req, res) {
  * Supprimer un produit
  */
 exports.remove = function(req, res) {
-  var product = new Product(req.body.deleteProduit);
+  var product = new Product(req.body.deleteProduct);
   product.findById(product._id, function(err, item) {
     if (err) {
       res.send({

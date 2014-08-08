@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 // define the schema for our user model
-var complaintSchema = mongoose.Schema({
+var complaintsSchema = mongoose.Schema({
 
     libelle: String,
     category: String,
@@ -36,4 +36,4 @@ var complaintSchema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('Complaints', complaintSchema);
+module.exports = mongoose.model('Complaints', complaintsSchema);

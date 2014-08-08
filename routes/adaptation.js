@@ -12,6 +12,8 @@ module.exports = function(app, passport) {
 
 	var productDAO = require('../api/dao/productDAO');
     var userDAO = require('../api/dao/userDAO');
+    var complaintDAO = require('../api/dao/complaintDAO');
+    var cusDAO = require('../api/dao/cusDAO');
 	//passport service check if user is loged
 	function isLoggedIn(req, res, next) {
 
@@ -36,10 +38,19 @@ module.exports = function(app, passport) {
 	app.post('/getAllProducts', productDAO.getAllProducts);
 	app.post('/getProductsById', productDAO.findById);
 
-    app.post('/ajouterUser',  productDAO.addItem);
-    app.post('/getAllUser', productDAO.getAllUsers);
-    app.post('/getUserById', productDAO.findById);
+    app.post('/ajouterUser',  userDAO.addItem);
+    app.post('/getAllUser', userDAO.getAllUsers);
+    app.post('/getUserById', userDAO.findById);
 
+    app.post('/ajoutercomp',  complaintDAO.addItem);
+    app.post('/getAllcomp', complaintDAO.getAllComplaints);
+    app.post('/getcompById', complaintDAO.findById);
+    app.post('/deleteComp', complaintDAO.remove);
+
+
+    app.post('/ajoutercus',  cusDAO.addItem);
+    app.post('/getAllCus', cusDAO.getAllCus);
+    app.post('/getcusById', cusDAO.findById);
 	//service passport
 	//passport service signin
 	app.post('/signup', passport.authenticate('local-signup', {

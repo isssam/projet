@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 // define the schema for our user model
-var RUSSchema = mongoose.Schema({
+var CUSSchema = mongoose.Schema({
 
     
     dateOperation: {
@@ -34,4 +34,4 @@ var RUSSchema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('RUS', complaintSchema);
+module.exports = mongoose.model('CUS', CUSSchema);

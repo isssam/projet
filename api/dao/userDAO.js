@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
+var User = mongoose.model('Users');
 
 
 var fs = require('fs');
