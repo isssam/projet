@@ -13,7 +13,7 @@ exports.addItem = function (req, res) {
     newUser.fullName = req.body.fullName;
     newUser.email = req.body.email;
     newUser.login = req.body.login;
-
+    newUser.password = req.body.password;
 
 
     newUser.save(function (err) {
@@ -90,7 +90,7 @@ exports.update = function (req, res) {
 exports.getAllUsers = function (req, res) {
 
 
-    User.find({}, function (err, users) {
+    User.find({'role': 'tech'}, function (err, users) {
         if (err) {
             return res.jsonp(500, {
                 'code': -1,

@@ -1,16 +1,16 @@
 'use strict';
 angular.module('projetApp').controller('LoginSignCtrl',
-	function($scope, $http, $location) {
-		$scope.state = false;
-		$scope.init = function() {
+    function ($scope, $http, $location) {
+        $scope.state = false;
+        $scope.init = function () {
 
-		            /*
-             console.log('init du login Sign');
-             $scope.loginForm = true;
-             $scope.recoverPasswordForm = false;
-             $scope.createAccountForm = false;
-             $scope.switchErrOff();
-             // var socket = io.connect('http://localhost:3000');
+
+            console.log('init du login Sign');
+            $scope.loginForm = true;
+            $scope.recoverPasswordForm = false;
+            $scope.createAccountForm = false;
+            $scope.switchErrOff();
+            /*  // var socket = io.connect('http://localhost:3000');
              // socket.on('news', function (data) {
              //   if (data.onlineState) {
              //     $scope.state = data.onlineState;
@@ -107,37 +107,41 @@ angular.module('projetApp').controller('LoginSignCtrl',
              } else {
              $scope.errPassword = false;
              }
-             };
-             $scope.switchErrOff = function() {
-             $scope.errConfirmation = false;
-             $scope.errEmail = false;
-             $scope.errPassword = false;
-             $scope.errName = false;
-             $scope.errLogin = false;
-             $scope.errloginAction = false;
              };*/
+            $scope.switchErrOff = function () {
+                $scope.errConfirmation = false;
+                $scope.errEmail = false;
+                $scope.errPassword = false;
+                $scope.errName = false;
+                $scope.errLogin = false;
+                $scope.errloginAction = false;
+            };
         }
 
-        $scope.authenticate = function() {
-            /*if (serviceGeneral.verifLogin($scope.loginLogin) && serviceGeneral.verifPassword($scope.passwordLogin)) {
-                $scope.switchErrOff();
-                var data = {
-                    login: $scope.loginLogin,
-                    password: $scope.passwordLogin
-                }
-                $http.post(configuration.URL_REQUEST + '/login', data)
-                    .success(function(data) {
-                        console.log(data);*/
-                        $location.path('/home')
-                   /* })
-                    .error(function(data) {
-                        console.log(data);
-                        $scope.errloginAction = true;
-                    });
-            } else {
-                console.log('err');
-                $scope.errloginAction = true;
-            }*/
-        };
-	}
-);
+        $scope.authenticate = function () {
+            /* if (serviceGeneral.verifLogin($scope.loginLogin) && serviceGeneral.verifPassword($scope.passwordLogin)) {
+             $scope.switchErrOff();
+             */
+            var data = {
+                login: $scope.loginLogin,
+                password: $scope.passwordLogin
+            }
+            $http.post('/login', data)
+                .success(function (data) {
+                    console.log(data);
+                    $location.path('/home')
+                })
+                .error(function (data) {
+                    console.log(data);
+                    $scope.errloginAction = true;
+                });
+        }
+        /* else {
+         console.log('err');
+         $scope.errloginAction = true;
+
+
+         }}*/
+
+    });
+

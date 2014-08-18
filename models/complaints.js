@@ -10,29 +10,39 @@ var complaintsSchema = mongoose.Schema({
 
     libelle: String,
     category: String,
-    description: String
-    
-   /* status: {
+    description: String,
+    state: {
         type: Number,
-        default: 0
+        default: 3
+    },
+    cuss: [
+        {
+            type: ObjectId,
+            ref: 'CUS'
+        }
+    ]
 
-    },
-    validated: {
-        type: Boolean,
-        default: false
-    },
-    created: {
-        type: Date,
-        default: Date.now
-    },
-    modified: {
-        type: Date
-            },
-    createdby: [{
-        type: ObjectId,
-        ref: 'Clients'
-    }]*/
-   
+    /* status: {
+     type: Number,
+     default: 0
+
+     },
+     validated: {
+     type: Boolean,
+     default: false
+     },
+     created: {
+     type: Date,
+     default: Date.now
+     },
+     modified: {
+     type: Date
+     },
+     createdby: [{
+     type: ObjectId,
+     ref: 'Clients'
+     }]*/
+
 });
 
 

@@ -1,7 +1,7 @@
 'use strict';
-var projetApp = angular.module('projetApp', ['ngRoute', 'ui.router']);
+var projetApp = angular.module('projetApp', ['ngRoute', 'ui.router' , 'ngTable']);
 projetApp.config(
-    function($routeProvider, $stateProvider) {
+    function ($routeProvider, $stateProvider) {
         $stateProvider
             .state('index', {
                 url: '',
@@ -52,28 +52,67 @@ projetApp.config(
                         controller: 'HeaderCtrl'
                     }
                 }
+            }).state('afecte', {
+                url: '/afecte',
+                views: {
+                    'bodyContentView': {
+                        templateUrl: 'views/afecte/afecte.html',
+                        controller: 'AfecteCtrl'
+                    },
+                    'footerContentView': {
+                        templateUrl: 'views/footer/footer.html'
+                    },
+                    'sideContentView': {
+                        templateUrl: 'views/sideBar/sideBar.html',
+                        controller: 'SideBarCtrl'
+                    },
+                    'headerContentView': {
+                        templateUrl: 'views/header/header.html',
+                        controller: 'HeaderCtrl'
+                    }
+                }
+            }).state('detail', {
+                url: '/detail',
+                views: {
+                    'bodyContentView': {
+                        templateUrl: 'views/detail/detail.html',
+                        controller: 'detailCtrl'
+                    },
+                    'footerContentView': {
+                        templateUrl: 'views/footer/footer.html'
+                    },
+                    'sideContentView': {
+                        templateUrl: 'views/sideBar/sideBar.html',
+                        controller: 'SideBarCtrl'
+                    },
+                    'headerContentView': {
+                        templateUrl: 'views/header/header.html',
+                        controller: 'HeaderCtrl'
+                    }
+                }
             })
     })
+
 /*
-angular
-  .module('projetApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });*/
+ angular
+ .module('projetApp', [
+ 'ngAnimate',
+ 'ngCookies',
+ 'ngRoute',
+ 'ngSanitize',
+ 'ngTouch'
+ ])
+ .config(function ($routeProvider) {
+ $routeProvider
+ .when('/', {
+ templateUrl: 'views/main.html',
+ controller: 'MainCtrl'
+ })
+ .when('/about', {
+ templateUrl: 'views/about.html',
+ controller: 'AboutCtrl'
+ })
+ .otherwise({
+ redirectTo: '/'
+ });
+ });*/

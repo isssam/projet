@@ -16,15 +16,15 @@ var CUSSchema = mongoose.Schema({
     
     idUser: {
         type: ObjectId,
-        ref: 'users'
+        ref: 'Users'
     },
     idComplaint: {
         type: ObjectId,
         ref: 'Complaints'
     },
     idStatus: {
-        type: String,
-        default: 'New'
+        type: Number,
+        default: 0
     },
     commenter: {
         type: String,
