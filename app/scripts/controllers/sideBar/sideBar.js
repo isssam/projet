@@ -1,8 +1,10 @@
 'use strict';
 angular.module('projetApp').controller('SideBarCtrl',
-    function ($scope) {
+    function ($scope, $location) {
         $scope.state = false;
         $scope.produitSubMenu = false;
+
+
         $scope.init = function () {
 
             //   var socket = io.connect('http://localhost:3000');
@@ -17,10 +19,26 @@ angular.module('projetApp').controller('SideBarCtrl',
             //       my: 'data'
             //     });
             //   });
+
         };
 
-        $scope.openCollapsed = function () {
-            console.log('----->')
+        $scope.detailComplaint = function () {
+
+            $location.path('/detail');
+
+            $scope.myVar1 = '';
+            $scope.myVar = 'active';
+        }
+        $scope.complaint = function () {
+
+            $location.path('/home');
+
+            $scope.myVar = '';
+            $scope.myVar1 = 'active';
+        }
+
+        /* $scope.openCollapsed = function () {
+         console.log('----->')
             $scope.produitSubMenu = !$scope.produitSubMenu;
         }
         $scope.toggleSideBar = function () {
@@ -84,7 +102,7 @@ angular.module('projetApp').controller('SideBarCtrl',
                 }
             }
 
-        }
+         }*/
 
     }
 );

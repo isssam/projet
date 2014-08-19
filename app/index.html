@@ -21,7 +21,7 @@
     <link id="base-style-responsive" href="styles/css/style-responsive.css" rel="stylesheet"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext'
           rel='stylesheet' type='text/css'/>
-    > <!-- build:css(.) styles/vendor.css -->
+    <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ng-table/ng-table.css"/>
     <!-- endbower -->
@@ -33,31 +33,30 @@
 </head>
 <body ng-app="projetApp">
 <!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
+
 <![endif]-->
 
 <!-- Add your site or application content here -->
 
-    <div ui-view="headerContentView"></div>
+<div ui-view="headerContentView"></div>
 <div class="container-fluid">
     <div class="row-fluid">
-
 
 
         <div ui-view="sideContentView">
         </div>
 
-            <div ui-view="bodyContentView">
-            </div>
+        <div ui-view="bodyContentView">
+        </div>
 
 
-
-    </div><!--/fluid-row-->
+    </div>
+    <!--/fluid-row-->
 
     <div class="clearfix"></div>
     <div ui-view='footerContentView'></div>
-</div><!--/.fluid-container-->
+</div>
+<!--/.fluid-container-->
 
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

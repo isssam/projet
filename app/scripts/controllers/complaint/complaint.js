@@ -1,6 +1,6 @@
 'use strict';
 angular.module('projetApp').controller('CompCtrl',
-    function ($scope, $rootScope, $http, ngTableParams) {
+    function ($scope, $rootScope, $http) {
         $scope.state = false;
         $scope.status = ['NOUVEAU', 'EN COURS', 'REJETER', 'VALIDER'];
         $scope.statusColor = ['important', 'warning', 'inverse', 'success'];
@@ -13,7 +13,7 @@ angular.module('projetApp').controller('CompCtrl',
 
         $scope.init = function () {
 
-            $http.post('http://localhost:3000/getAllcomp')
+            $http.post('/getAllComplaintsByUserId', {idUser: '53e8dc2e154e6d02364ddfad'})
                 .success(function (data) {
                     console.log(data);
                     $scope.listcomp = data;
@@ -130,14 +130,14 @@ angular.module('projetApp').controller('CompCtrl',
 
         };
 
-        $scope.tableParams = new ngTableParams({
-            page: 1,            // show first page
-            count: 5          // count per page
-        }, {
-            total: $scope.listcomp.length, // length of data
-            getData: function ($defer, params) {
-                $defer.resolve($scope.listcomp.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-            }
-        });
+        /* $scope.tableParams = new ngTableParams({
+         page: 1,            // show first page
+         count: 5          // count per page
+         }, {
+         total: $scope.listcomp.length, // length of data
+         getData: function ($defer, params) {
+         $defer.resolve($scope.listcomp.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+         }
+         });*/
 
     });

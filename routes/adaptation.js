@@ -46,11 +46,13 @@ module.exports = function (app, passport) {
     app.post('/getAllcomp', complaintDAO.getAllComplaints);
     app.post('/getcompById', complaintDAO.getComplaintById);
     app.post('/deleteComp', complaintDAO.remove);
-
+    app.post('/getAllComplaintsByUserId', complaintDAO.findAllComplaintsByUserId);
 
     app.post('/editerCus', cusDAO.update);
     app.post('/getAllCus', cusDAO.getAllCus);
     app.post('/getcusById', cusDAO.findById);
+    app.post('/getCusByComplaintId', cusDAO.findCusByComplaintId);
+
     //service passport
     //passport service signin
     app.post('/signup', passport.authenticate('local-signup', {

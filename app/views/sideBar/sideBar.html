@@ -3,9 +3,10 @@
 <div id="sidebar-left" class="span1" data-ng-init='init()'>
     <div class="nav-collapse sidebar-nav">
         <ul class="nav nav-tabs nav-stacked main-menu">
-            <li class="active"><a href="./index.html"><i class="fa-icon-bar-chart"></i><span class="hidden-tablet"> Reclamation</span></a>
+            <li class="{{myVar1}}"><a ng-click="complaint()"><i class="fa-icon-bar-chart"></i><span
+                    class="hidden-tablet"> Réclamation</span></a>
             </li>
-            <li><a href="./infrastructure.html"><i class="fa-icon-hdd"></i><span
+            <!--<li><a href="./infrastructure.html"><i class="fa-icon-hdd"></i><span
                     class="hidden-tablet"> Infrastructure</span></a></li>
             <li><a href="./messages.html"><i class="fa-icon-envelope"></i><span
                     class="hidden-tablet"> Messages</span></a></li>
@@ -15,17 +16,19 @@
             <li><a href="./widgets.html"><i class="fa-icon-dashboard"></i><span
                     class="hidden-tablet"> Widgets</span></a></li>
             <li><a href="./form.html"><i class="fa-icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
-            <li><a href="./chart.html"><i class="fa-icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a>
+           -->
+            <li class="{{myVar}}"><a ng-click="detailComplaint()"><i class="fa-icon-list-alt"></i><span
+                    class="hidden-tablet"> Détail</span></a>
             </li>
+            <!--
+                        <li><a href="./table.html"><i class="fa-icon-align-justify"></i><span
+                                class="hidden-tablet"> Tables</span></a></li>
+                        <li><a href="./calendar.html"><i class="fa-icon-calendar"></i><span
+                                class="hidden-tablet"> Calendar</span></a></li>
+                        <li><a href="./file-manager.html"><i class="fa-icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a>
+                        </li>-->
 
-            <li><a href="./table.html"><i class="fa-icon-align-justify"></i><span
-                    class="hidden-tablet"> Tables</span></a></li>
-            <li><a href="./calendar.html"><i class="fa-icon-calendar"></i><span
-                    class="hidden-tablet"> Calendar</span></a></li>
-            <li><a href="./file-manager.html"><i class="fa-icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a>
-            </li>
-
-            <li><a href="./login.html"><i class="fa-icon-lock"></i><span class="hidden-tablet"> Login Page</span></a>
+            <li><a href=""><i class="fa-icon-lock"></i><span class="hidden-tablet"> Login Page</span></a>
             </li>
         </ul>
     </div>
