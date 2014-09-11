@@ -21,6 +21,7 @@ angular.module('projetApp').controller('CompCtrl',
         $scope.inputLibelle = 'disabledInput'
         //$scope.selectedStatus = 0;
 
+
         $rootScope.$watch('userConnected ', function () {
             console.log('event recieved');
             $scope.init();

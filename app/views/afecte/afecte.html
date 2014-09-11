@@ -1,0 +1,71 @@
+<noscript>
+    <div class="alert alert-block span11">
+        <h4 class="alert-heading">Warning!</h4>
+
+        <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to
+            use this site.</p>
+    </div>
+</noscript>
+
+<div id="content" class="span11">
+    <div class="row-fluid sortable" data-ng-init='init()'>
+        <div class="box span12">
+            <!-- <div class="box-header" data-original-title="">
+                 <h2><i class="halflings-icon edit"></i><span class="break"></span>Form Elements</h2>
+
+                 <div class="box-icon">
+                     <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                     <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                 </div>
+             </div>-->
+
+
+            <form class="form-horizontal"/>
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label">Libelle</label>
+
+                    <div class="controls">
+                        <input class="input-xlarge disabled" id="disabledInput" type="text"
+                               placeholder="Disabled input here…" disabled="">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="selectError">technicien</label>
+
+                    <div class="controls">
+                        <select id="selectError" data-rel="chosen">
+                            <option ng-repeat="user in listuser"> {{user.fullName}}
+                            <option/>
+
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="control-group hidden-phone">
+                    <label class="control-label" for="textarea2">recommandation</label>
+
+                    <div class="controls">
+                        <textarea class="cleditor" id="textarea2" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button type="reset" class="btn">Annuler</button>
+                </div>
+
+
+            </fieldset>
+            </form>
+
+        </div>
+    </div>
+    <!--/span-->
+
+</div>
+<!--/row-->
+</div>

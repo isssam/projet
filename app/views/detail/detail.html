@@ -1,0 +1,84 @@
+<div id="content" class="span11">
+
+
+    <div class="row-fluid">
+        <div class="span7" data-ng-init='init()'>
+            <h1>{{config.detailTitle}}</h1>
+
+
+            <div class="priority low"><span>{{config.detailInfo}}</span>
+            </div>
+
+            <div class="task low">
+                <div class="desc">
+
+                    <div class="title">{{listCus[0].idComplaint.libelle}}</div>
+                    <div>{{listCus[0].idComplaint.description}}</div>
+                    <div>{{listCus[0].idComplaint.category}}</div>
+                    <div ng-model="firstStatus" ng-repeat="detail in listCus "><span
+                            class="label label-{{statusColor[detail.idStatus]}}" ng-show="$last">{{status[detail.idStatus]}} </span>
+                    </div>
+
+                </div>
+                <div class="time">
+                    <div class="date">{{listCus[0].dateOperation | date}}</div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="box span4" ontablet="span6" ondesktop="span4" data-ng-init='init()'>
+            <div class="box-header">
+                <h2><i class="halflings-icon comment"></i><span class="break"></span>{{config.Title8}}</h2>
+
+                <div class="box-icon">
+
+                </div>
+            </div>
+            <div class="box-content">
+                <ul class="chat">
+                    <li class="right" ng-repeat="detail in listCus "
+                        ng-if="detail.commenter !== '' && (userConnected.role == 'admin' || userConnected.role == 'tech')">
+
+								<span class="message">
+                                    <span class="arrow"></span>
+                                    	<span class="time">
+                                        {{detail.dateOperation | date}}</span>
+                                    <span class="label label-{{statusColor[detail.idStatus]}}">
+                                        {{status[detail.idStatus]}} </span>
+
+									<span class="text">
+										{{detail.commenter}}
+									</span>
+								</span>
+                    </li>
+                    <li class="left" ng-repeat="detail in listCus "
+                        ng-if="detail.commenterclient !== '' && (userConnected.role == 'admin' || userConnected.role == 'client')">
+
+								<span class="message"><!--ng-if="detail.idUser.role == 'tech' && detail.commenter !== ''"-->
+                                    <span class="arrow"></span>
+                                   	<span class="label label-{{statusColor[detail.idStatus]}}">
+                                        {{status[detail.idStatus]}} </span>
+									<span class="time">
+                                        {{detail.dateOperation | date}}</span>
+									<span class="text">
+										{{detail.commenterclient}}
+									</span>
+								</span>
+                    </li>
+
+                </ul>
+                <!-- <div class="chat-form">
+                     <textarea ng-model="newCuss.commenter"></textarea>
+                     <button ng-click="editerCus()" class="btn btn-info">Envoyer message</button>
+                 </div>-->
+            </div>
+        </div>
+        <!--/span-->
+
+
+    </div>
+</div>
+			
+      

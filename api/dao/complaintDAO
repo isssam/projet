@@ -1,0 +1,238 @@
+'use strict';
+
+var mongoose = require('mongoose');
+var CUS = mongoose.model('CUS');
+var Complaint = mongoose.model('Complaints');
+
+var fs = require('fs');
+
+exports.addItem = function (req, res) {
+    // console.log(req.files);
+
+//	var complaintData = JSON.parse(req.body.complaintData);
+
+    var newComplaint = new Complaint();
+    newComplaint.libelle = req.body.libelle;
+    newComplaint.category = req.body.category;
+    newComplaint.description = req.body.description;
+    newComplaint.state = req.body.state;
+
+    newComplaint.save(function (err, compItem) {
+        if (err) {
+            console.log(err);
+            throw err;
+        } else {
+            var cus = new CUS({
+                'idComplaint': compItem._id,
+                //Récupérer lID de USER A VOIR ======>
+                'idUser': req.body.idUser
+            });
+            cus.save(function (err, itemCus) {
+                if (err) {
+                    res.send({
+                        'result': 'error'
+                    });
+                } else {
+                    console.log('sending result to client');
+                    compItem.cuss.push(itemCus);
+                    console.log(itemCus);
+                    compItem.save(function (err) {
+                        if (err) {
+                            res.send({
+                                'result': 'error'
+                            });
+                        } else {
+                            res.jsonp(200, compItem);
+
+                        }
+                    });
+                }
+
+            });
+            console.log(newComplaint.cuss);
+        }
+
+    });
+
+};
+/**
+ * Supprimer une reclamation
+ */
+
+exports.remove = function (req, res) {
+
+    /*            Complaint.update({_id: req.body.idComplaint}, {$pull : {cuss : req.body.idCuss}}, function(err, numberAffected){
+     if(err){
+     res.send({
+     'result': 'error'
+     });
+     } else {
+     res.jsonp(200, numberAffected);
+     }
+     });*/
+
+    Complaint.findByIdAndRemove(req.body.idComplaint, function (err, complItem) {
+            console.warn('tableau', complItem.cuss);
+            var listCuss = complItem.cuss;
+            Complaint.update({_id: complItem._id}, {'$pullAll': {cuss: listCuss}}).exec(function (err) {
+                if (err) {
+                    res.send({
+                        'result': 'error'
+                    });
+                } else {
+                    CUS.remove({ _id: { $in: listCuss }}, function (err) {
+                        if (err) {
+                            res.send({
+                                'result': 'error'
+                            });
+                        } else {
+                            res.jsonp(200);
+                        }
+                    });
+                }
+            });
+
+        }
+    );
+
+
+    /*    Complaint.findByIdAndRemove(req.body.idcomp, function (err) {
+     if (err) {
+     res.send({
+     'result': 'error'
+     });
+     } else {
+
+     CUS.update({_id: Complaint._id}, {$pull : {icomplaint : Complaint._id}}, function(err, numberAffected){
+     console.log(numberAffected);
+     if(!err){
+     return console.log('removed compalint id');
+     } else {
+     return console.log(err);
+     }
+     });
+     console.log('Job removed');
+     return res.send('');
+     res.jsonp(200);
+     }
+     });*/
+
+
+}
+/*  Complaint.pre('remove', function(next){
+ this.model('CUS').update(
+ {idComplaint: this._id},
+ {$pull: {idComplaint: this._id}},
+ {multi: true},
+ next
+ );
+ });*/
+
+
+/**
+ * Editer une reclamation
+ */
+exports.update = function (req, res) {
+    var complaintData = JSON.parse(req.body.complaintData);
+    var complaint = new Complaint(complaintData.complaint);
+
+    Complaint.findById(complaint._id, function (err, item) {
+        if (err) {
+            res.send({
+                'result': 'error'
+            });
+        } else {
+            item.libelle = complaint.libelle;
+            item.category = complaint.category;
+            item.description = complaint.description;
+            item.state = complaint.state;
+            item.save(function (err) {
+                if (err) {
+                    res.send({
+                        'result': 'error'
+                    });
+                } else {
+                    //helpers.journalisation(1, req.user, req._parsedUrl.pathname, JSON.stringify(item));
+                    res.jsonp(200, item);
+                }
+            });
+        }
+    });
+};
+
+exports.getAllComplaints = function (req, res) {
+
+    Complaint.find({})
+        .populate({path: 'cuss', options: { sort: {'dateOperation': -1}}})
+        .exec(function (err, complaints) {
+            if (err) {
+                return res.jsonp(500, {
+                    'code': -1,
+                    'message': 'Erreur lors de la recuperation'
+                });
+            } else {
+                return res.jsonp(200, complaints);
+            }
+        });
+};
+
+
+exports.getComplaintById = function (req, res) {
+    var id = req.body.idComplaint;
+
+    Complaint
+        .findById(id)
+        .populate({path: 'cuss', options: { sort: {'dateOperation': -1}}})
+        .exec(function (err, reclamation) {
+            if (err) {
+                return res.jsonp(400, {
+                    'reclamation': 'une erreur innatendu '
+                });
+            } else {
+                return res.jsonp(200, reclamation);
+            }
+        });
+};
+
+exports.findAllComplaintsByUserId = function (req, res) {
+    var idUser = req.body.idUser;
+    CUS.find({'idUser': idUser})
+        .select('idComplaint')
+        .exec(function (err, cuss) {
+            if (err) {
+                return res.jsonp(400, {
+                    'reclamation': 'une erreur innatendu '
+                });
+            } else {
+                var compIds = [];
+                if (cuss) {
+                    cuss.forEach(function (item) {
+                        if (item.idComplaint && compIds.indexOf(item.idComplaint.toString()) < 0) {
+                            compIds.push(item.idComplaint.toString());
+                        }
+                    });
+                }
+
+                if (compIds.length > 0) {
+                    Complaint.find({ _id: { $in: compIds }})
+                        .populate({path: 'cuss', options: { sort: {'dateOperation': -1}}})
+
+                        .exec(function (err, complaints) {
+                            if (err) {
+                                return res.jsonp(500, {
+                                    'code': -1,
+                                    'message': 'Erreur lors de la recuperation'
+                                });
+                            } else {
+                                return res.jsonp(200, complaints);
+                            }
+                        });
+                } else {
+                    return res.jsonp(200, []);
+                }
+
+            }
+        });
+
+
+};

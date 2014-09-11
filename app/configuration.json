@@ -1,0 +1,55 @@
+{
+    "test": "bbbbb",
+    "loginTitle": "Veuillez vous connecter",
+    "loginUsername": "Nom utilisateur",
+    "loginPasse": "Mot de passe",
+    "loginButton": "Connexion",
+    "loginUp": "Cliquez ici",
+    "loginText": "pour créer un compte",
+    "loginError": " Mot de pass incorrect ! ",
+
+    "registrationTitle": " Inscription ",
+    "registrationUsername": " Pseudo",
+    "registrationName": " Nom ",
+    "registrationEmail": " Email ",
+    "registrationPasse": " Mot de passe ",
+    "registrationPasseConf": " Entrez de nouveau mot le passe ",
+    "registrationTypePasse": "",
+    "registrationTypePasseConf": "",
+    "registrationButonOk": " Valider ",
+    "registrationButonNo": " Annuler ",
+
+
+    "title": "RECLAMATION",
+    "header1": "Se deconecter",
+    "slider1": "Reclamation",
+    "slider2": "Detail",
+    "slider3": "Utilisateur",
+    "slider4": "Deconexion",
+
+    "tableTitle": "RECLAMATIONS",
+    "tableSearch": "Recherche",
+    "newButton": "Nouvelle Reclamation",
+    "Title1": "Libelle",
+    "Title2": "Categorie",
+    "Title3": "Description",
+    "Title4": "Statut",
+    "Title5": "Technicien Statut",
+    "Title6": "Action",
+    "Title7": "Technicien",
+    "Title8": "Message",
+    "Title9": "Message pour client",
+    "tableNext": "Suivant",
+    "tableBack": "Precedent",
+
+    "deletTitle": "Suppression",
+    "addTitle": "Nouveau",
+    "editTitle": "Mise à jour",
+    "alert": "Voulez vous supprimer cette reclamation!!",
+
+    "detailTitle": "Detail reclamtion",
+    "detailInfo": "Info reclamation",
+    "role": "Role",
+    "users": "Liste des utilisateurs"
+
+}
