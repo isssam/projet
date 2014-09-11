@@ -1,6 +1,7 @@
 /**
  * Created by root on 8/5/14.
  */
+var flash = require('connect-flash');
 var express = require('express'),
     app = express(),
     http = require('http'),
@@ -9,6 +10,7 @@ var express = require('express'),
     passport = require('passport'),
     cookieParser = require('cookie-parser'),
     session = require('express-session');
+var LocalStrategy = require('passport-local').Strategy;
 
 require('./api/service/passport')(passport);
 
@@ -42,7 +44,7 @@ app.use(session({
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-
+app.use(flash());
 //serve angularJS file from /app
 app.use(express.static('./app'));
 

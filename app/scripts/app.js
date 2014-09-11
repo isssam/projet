@@ -1,10 +1,10 @@
 'use strict';
-var projetApp = angular.module('projetApp', ['ngRoute', 'ui.router' , 'ngTable']);
+var projetApp = angular.module('projetApp', ['ngRoute', 'ui.router' , 'ngTable', 'ui.bootstrap']);
 projetApp.config(
     function ($routeProvider, $stateProvider) {
         $stateProvider
             .state('index', {
-                url: '',
+                url: '/',
                 views: {
                     'bodyContentView': {
                         templateUrl: 'views/loginSign/loginSign.html',
@@ -91,28 +91,72 @@ projetApp.config(
                     }
                 }
             })
-    })
+            .state('users', {
+                url: '/users',
+                views: {
+                    'bodyContentView': {
+                        templateUrl: 'views/users/users.html',
+                        controller: 'usersCtrl'
+                    },
+                    'footerContentView': {
+                        templateUrl: 'views/footer/footer.html'
+                    },
+                    'sideContentView': {
+                        templateUrl: 'views/sideBar/sideBar.html',
+                        controller: 'SideBarCtrl'
+                    },
+                    'headerContentView': {
+                        templateUrl: 'views/header/header.html',
+                        controller: 'HeaderCtrl'
+                    }
+                }
+            })
+        // $locationProvider.html5Mode(true);
+    });
 
-/*
- angular
- .module('projetApp', [
- 'ngAnimate',
- 'ngCookies',
- 'ngRoute',
- 'ngSanitize',
- 'ngTouch'
- ])
- .config(function ($routeProvider) {
- $routeProvider
- .when('/', {
- templateUrl: 'views/main.html',
- controller: 'MainCtrl'
- })
- .when('/about', {
- templateUrl: 'views/about.html',
- controller: 'AboutCtrl'
- })
- .otherwise({
- redirectTo: '/'
- });
- });*/
+projetApp.run(function ($rootScope, $location, $http) {
+    $http.get('http://localhost:3000/configuration.json')
+        .success(function (data) {
+            // you can do some processing here
+            console.log('in here');
+            $rootScope.config = data;
+            console.log($rootScope.config)
+        }).error(function (data) {
+            console.log(data)
+        });
+    $rootScope.$on('$locationChangeStart', function (event, next) {
+
+        $http.get('/profile')
+            .success(function (result) {
+                console.log('profile locationchange');
+                console.log(result.role)
+
+                $rootScope.userConnected = result;
+
+
+                if (!$rootScope.$$phase) {
+                    $rootScope.$apply();
+                }
+                console.log(next)
+                if (next && (next == 'http://localhost:3000/#/') && (result.role == 'admin' || result.role == 'client' || result.role == 'tech'))
+                    $location.path('/home');
+                /* if (next && (next.indexOf('home') || next.indexOf('detail')) && (result.role != 'admin' || result.role != 'client' || result.role != 'tech')) {
+                 console.log('jhfffffhhhh');
+                 $location.path('/');
+                 }*/
+                /*if (next && (next.indexOf('users')  && (result.role != 'admin' ))  ) {
+                 console.log('jhfffffhhhh');
+                 $location.path('/');
+                 }*/
+            })
+            .error(function () {
+                if (next) {
+                    console.log('jhhhddddddhh');
+                    if ((next.indexOf('home') || next.indexOf('detail') || next.indexOf('users'))) {
+                        $location.path('/');
+                    }
+                }
+            });
+    });
+})
+;

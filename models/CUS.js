@@ -8,12 +8,12 @@ var Schema = mongoose.Schema,
 // define the schema for our user model
 var CUSSchema = mongoose.Schema({
 
-    
+
     dateOperation: {
         type: Date,
         default: Date.now
     },
-    
+
     idUser: {
         type: ObjectId,
         ref: 'Users'
@@ -26,11 +26,19 @@ var CUSSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    statustech: {
+        type: Number,
+        default: 0
+    },
     commenter: {
         type: String,
         default: ''
+    },
+    commenterclient: {
+        type: String,
+        default: ''
     }
-   
+
 });
 
 

@@ -1,201 +1,276 @@
 <div id="content" class="span11">
-    <div class="row-fluid sortable" data-ng-init='init()'>
+<div class="row-fluid sortable">
 
-        <div class="box-header" data-original-title="">
-            <h2><i class="halflings-icon user"></i><span class="break"></span>RECLAMATIONS</h2>
+<div class="box-header" data-original-title="">
+    <h2><i class="halflings-icon user"></i><span class="break"></span>{{config.tableTitle}}</h2>
+</div>
+
+
+<div class="box-content">
+    <div class="row-fluid">
+        <div class="span6">
+            <label>{{config.tableSearch}}<input type="text" searchintable ng-model='searchedWord' class="form-control"/>
+            </label>
         </div>
-
-
-        <div class="box-content">
-            <div class="row-fluid">
-                <div class="span6">
-                    <label>Recherche: <input type="text" ng-model="simpleFilter"
-                                             aria-controls="DataTables_Table_0"></label>
-                </div>
-                <div class="span6">
-                    <a data-toggle="modal" data-target="#myModalAdd" class="btn btn-primary" href=""><i
-                            class="halflings-icon plus"></i>Nouvelle reclamation</a>
-                </div>
-            </div>
-
-            <table class="table table-striped table-bordered bootstrap-datatable datatable">
-                <thead>
-                <tr>
-                    <th>Libelle</th>
-                    <th>Catégorie</th>
-                    <th>Décription</th>
-                    <th>Priorité</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="comp in listcomp  | filter:simpleFilter">
-                    <td><a class="btn" href="#/detail?id={{comp._id}}">{{comp.libelle}}</a></td>
-                    <td class="center">{{comp.category}}</td>
-                    <td class="center">{{comp.description}}</td>
-                    <td class="center"><span class="priority {{stateColor[comp.state]}}">[{{state[comp.state]}}]</span>
-                    </td>
-                    <td class="center">
-                        <span class="label label-{{statusColor[comp.cuss[0].idStatus]}}">{{status[comp.cuss[0].idStatus]}}</span>
-                    </td>
-                    <td class="center">
-
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#myModal"
-                           ng-click="initAffecterRec(comp)">
-                            <i class=" halflings-icon edit"></i>
-                        </a>
-                        <!--<a class="btn btn-danger" data-toggle="modal" data-target="#myModal"
-                           ng-click="initAffecterRec(comp)">
-                            <i class="halflings-icon pencil halflings-icon"></i>
-                        </a>-->
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#myModalRemove"
-                           ng-click="initAffecterRec(comp)">
-                            <i class="halflings-icon trash halflings-icon"></i>
-                        </a>
-
-                        <a class="btn btn-danger"
-                           href="#/detail?id={{comp._id}}">
-                            <i class="halflings-icon zoom-in halflings-icon"></i>
-                        </a>
-                        <!-- <a href="" class="glyphicons search" data-toggle="modal" data-target="#myModal"
-                            ng-click="initAffecterRec(comp)">Ok</a>-->
-                    </td>
-                </tr>
-
-
-                </tbody>
-
-
-            </table>
-        </div>
-
-        <div class="modal hide fade" id="myModal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Settings</h3>
-            </div>
-            <div class="modal-body">
-
-                <div class="control-group">
-                    <label class="control-label">Libelle</label>
-
-                    <div class="controls">
-                        <input ng-model="editComplaint.libelle" class="input-xlarge disabled" id="disabledInput"
-                               type="text"
-                               value="{{editComplaint.libelle}}"
-                               disabled="">
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">technicien</label>
-
-                    <div class="controls">
-
-                        <select ng-model="selectedTech" ng-options="user.fullName for user in listUser">
-                        </select>
-
-
-                    </div>
-
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">Status</label>
-
-                    <div class="controls">
-                        <select ng-model="selectedStatus" id="selectError" ng-options="o as o for o in status">
-
-                        </select>
-                    </div>
-
-                </div>
-
-
-                <div class="control-group hidden-phone">
-                    <label class="control-label" for="textarea2">recommandation</label>
-
-                    <div class="controls">
-                        <textarea ng-model="newCuss.commenter" class="cleditor" id="textarea2" rows="3"></textarea>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="modal-footer">
-                <a href="" class="btn btn-primary" ng-click="editerCus()" data-dismiss="modal">Envoyer</a>
-                <a href="" class="btn" data-dismiss="modal">Annuler</a>
-
-            </div>
-        </div>
-
-
-        <div class="modal hide fade" id="myModalRemove">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Settings</h3>
-            </div>
-            <div class="modal-body">
-
-                <div class="alert alert-danger" role="alert">Supprimer Réclamation !!!!</div>
-            </div>
-
-            <div class="modal-footer">
-                <a class="btn btn-primary" ng-click="removeComp()" class="close" data-dismiss="modal">Envoyer</a>
-                <a href="" class="btn" data-dismiss="modal">Annuler</a>
-
-            </div>
-        </div>
-
-
-        <div class="modal hide fade" id="myModalAdd">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Settings</h3>
-            </div>
-            <div class="modal-body">
-
-                <div class="control-group">
-                    <label class="control-label">Libelle</label>
-
-                    <div class="controls">
-                        <input ng-model="newComplaint.libelle" class="input-xlarge disabled" type="text">
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">catégorie</label>
-
-                    <div class="controls">
-                        <input ng-model="newComplaint.category" class="input-xlarge disabled" type="text">
-                    </div>
-
-                </div>
-                <div class="control-group">
-                    <label class="control-label">déscription</label>
-
-                    <div class="controls">
-                        <input ng-model="newComplaint.description" class="input-xlarge disabled" type="text">
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">état</label>
-
-                    <div class="controls">
-
-                        <select ng-model="selectedState" id="selectError" ng-options="o as o for o in state">
-
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a href="" class="btn btn-primary" ng-click="addComp()" data-dismiss="modal">Envoyer</a>
-                <a href="" class="btn" data-dismiss="modal">Annuler</a>
-
-            </div>
+        <div class="span6">
+            <a data-toggle="modal" data-target="#myModalAdd" class="btn btn-primary" href=""><i
+                    class="halflings-icon plus"></i>{{config.newButton}}</a>
         </div>
     </div>
+
+    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+        <thead>
+        <tr>
+            <th>{{config.Title1}}</th>
+            <th>{{config.Title2}}</th>
+            <th>{{config.Title3}}</th>
+            <!--<th>Priorité</th>-->
+            <th ng-if="isadmin || isclient">{{config.Title4}}</th>
+            <th ng-if="isadmin || istech">{{config.Title5}}</th>
+            <th>{{config.Title6}}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <!--  href="#/detail?id={{comp._id}}"-->
+        <tr ng-repeat="comp in pageData ">
+            <td ng-click="detailUrl(comp)">{{comp.libelle}}</td>
+            <td class="center" ng-click="detailUrl(comp)">{{comp.category}}</td>
+            <td class="center" ng-click="detailUrl(comp)">{{comp.description}}</td>
+            <!--<td class="center" ng-click="detailUrl(comp)"><span class="priority {{stateColor[comp.state]}}">[{{state[comp.state]}}]</span>
+            </td>-->
+            <td ng-if="isadmin || isclient" class="center" ng-click="detailUrl(comp)">
+                <span class="label label-{{statusColor[comp.cuss[0].idStatus]}}">{{status[comp.cuss[0].idStatus]}}</span>
+            </td>
+            <td ng-if="isadmin || istech" class="center" ng-click="detailUrl(comp)">
+                <span class="label label-{{statusColor[comp.cuss[0].statustech]}}">{{statustech[comp.cuss[0].statustech]}}</span>
+            </td>
+            <td class="center">
+
+                <a ng-if="isadmin" class="btn btn-danger" data-toggle="modal" data-target="#myModal"
+                   ng-click="initAffecterRec(comp)">
+                    <i class=" halflings-icon edit"></i>
+                </a>
+
+                <a ng-if="istech" class="btn btn-danger" data-toggle="modal" data-target="#myModaltech"
+                   ng-click="initAffecterRec(comp)">
+
+                    <i class=" halflings-icon edit"></i>
+                </a>
+                <!--<a class="btn btn-danger" data-toggle="modal" data-target="#myModal"
+                   ng-click="initAffecterRec(comp)">
+                    <i class="halflings-icon pencil halflings-icon"></i>
+                </a>-->
+                <a ng-if="isadmin " class="btn btn-danger" data-toggle="modal" data-target="#myModalRemove"
+                   ng-click="initAffecterRec(comp)">
+                    <i class="halflings-icon trash halflings-icon"></i>
+                </a>
+
+                <a class="btn btn-danger"
+                   href="#/detail?id={{comp._id}}">
+                    <i class="halflings-icon zoom-in halflings-icon"></i>
+                </a>
+                <!-- <a href="" class="glyphicons search" data-toggle="modal" data-target="#myModal"
+                    ng-click="initAffecterRec(comp)">Ok</a>-->
+            </td>
+        </tr>
+
+
+        </tbody>
+
+
+    </table>
+</div>
+<div pagination total-items="totalItems" page="currentPage" ng-model="currentPage"
+     items-per-page="pageSize" class="pagination-sm" max-size="100" list="listcomp "
+     previous-text="{{config.rowtitle3}}"
+     next-text="{{config.rowtitle3}}"></div>
+
+<div class="modal hide fade" id="myModal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>{{config.editTitle}}</h3>
+    </div>
+    <div class="modal-body">
+
+        <div class="control-group">
+            <label class="control-label">{{config.Title1}}</label>
+
+            <div class="controls">
+                <input ng-model="editComplaint.libelle" class="input-xlarge disabled" id="inputLibelle" disabled=""
+                       type="text"
+                       value="{{editComplaint.libelle}}"
+                        >
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">{{config.Title7}}</label>
+
+            <div class="controls">
+
+                <select ng-model="selectedTech" ng-options="user.fullName for user in listUser">
+                </select>
+
+
+            </div>
+
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">{{config.Title4}}</label>
+
+            <div class="controls">
+                <select ng-model="selectedStatus" id="selectError" ng-options="o as o for o in status">
+
+                </select>
+            </div>
+
+        </div>
+
+        <!---->
+        <div class="control-group hidden-phone">
+            <label class="control-label" for="textarea2">{{config.Title8}}</label>
+
+            <div class="controls">
+                <textarea ng-model="newCuss.commenter" class="cleditor" rows="3"></textarea>
+            </div>
+        </div>
+
+        <div ng-if="selectedStatus == 'VALIDER' || selectedStatus == 'REJETER'" class="control-group hidden-phone">
+            <label class="control-label" for="textarea2">{{config.Title9}}</label>
+
+            <div class="controls">
+                <textarea ng-model="newCuss.commenterclient" class="cleditor" rows="3"></textarea>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-primary" ng-click="editerCus()"
+           data-dismiss="modal">{{config.registrationButonOk}}</a>
+        <a href="" class="btn" ng-click="clearComp()" data-dismiss="modal">{{config.registrationButonNo}}</a>
+
+    </div>
+</div>
+
+
+<div class="modal hide fade" id="myModaltech">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Settings</h3>
+    </div>
+    <div class="modal-body">
+
+        <div class="control-group">
+            <label class="control-label">{{config.Title1}}</label>
+
+            <div class="controls">
+                <input ng-model="editComplaint.libelle" class="input-xlarge disabled" id="inputLibelle" disabled=""
+                       type="text"
+                       value="{{editComplaint.libelle}}"
+                        >
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label">{{config.Title4}} {{config.Title7}}</label>
+
+            <div class="controls">
+                <select ng-model="selectedStatusTech" id="selectError"
+                        ng-options="a as a for a in statusTechTech">
+
+                </select>
+            </div>
+
+        </div>
+
+
+        <div class="control-group hidden-phone">
+            <label class="control-label" for="textarea2">{{config.Title8}}</label>
+
+            <div class="controls">
+                <textarea ng-model="newCuss.commenter" class="cleditor" id="textarea2" rows="3"></textarea>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-primary" ng-click="editerCus()"
+           data-dismiss="modal">{{config.registrationButonOk}}</a>
+        <a href="" class="btn" ng-click="clearComp()" data-dismiss="modal">{{config.registrationButonNo}}</a>
+
+    </div>
+</div>
+
+
+<div class="modal hide fade" id="myModalRemove">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>{{config.deletTitle}}</h3>
+    </div>
+    <div class="modal-body">
+
+        <div class="alert alert-danger" role="alert">{{config.alert}}</div>
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-primary" ng-click="removeComp()" class="close" data-dismiss="modal">{{config.registrationButonOk}}</a>
+        <a href="" class="btn" data-dismiss="modal">{{config.registrationButonNo}}</a>
+
+    </div>
+</div>
+
+
+<div class="modal hide fade" id="myModalAdd">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>{{config.addTitle}}</h3>
+    </div>
+    <div class="modal-body">
+
+        <div class="control-group">
+            <label class="control-label">{{config.Title1}}</label>
+
+            <div class="controls">
+                <input ng-model="newComplaint.libelle" class="input-xlarge disabled" type="text">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">{{config.Title2}}</label>
+
+            <div class="controls">
+                <input ng-model="newComplaint.category" class="input-xlarge disabled" type="text">
+            </div>
+
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{config.Title3}}</label>
+
+            <div class="controls">
+                <input ng-model="newComplaint.description" class="input-xlarge disabled" type="text">
+            </div>
+        </div>
+
+        <!--   <div class="control-group">
+               <label class="control-label">état</label>
+
+               <div class="controls">
+
+                   <select ng-model="selectedState" ng-options="o as o for o in state">
+
+                   </select>
+               </div>
+           </div>-->
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-primary" ng-click="addComp()" data-dismiss="modal">{{config.registrationButonOk}}</a>
+        <a href="" class="btn" data-dismiss="modal" ng-click="clearComp()">{{config.registrationButonNo}}</a>
+
+    </div>
+</div>
+</div>
 </div>

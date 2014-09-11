@@ -58,21 +58,18 @@ exports.remove = function (req, res) {
 /**
  * Editer un user
  */
-exports.update = function (req, res) {
-    var userData = JSON.parse(req.body.userData);
-    var user = new User(userData.user);
+exports.updateRole = function (req, res) {
 
 
-    User.findById(user._id, function (err, item) {
+    User.findById(req.body._id, function (err, item) {
         if (err) {
             res.send({
                 'result': 'error'
             });
         } else {
-            newUser.fullName = userData.fullName;
-            newUser.email = userData.email;
-            newUser.login = userData.login;
-            newUser.role = req.body.login;
+            console.log('utilisateur trouver')
+
+            item.role = req.body.role;
             item.save(function (err) {
                 if (err) {
                     res.send({
@@ -87,10 +84,25 @@ exports.update = function (req, res) {
     });
 };
 
-exports.getAllUsers = function (req, res) {
+exports.getAllTech = function (req, res) {
 
 
     User.find({'role': 'tech'}, function (err, users) {
+        if (err) {
+            return res.jsonp(500, {
+                'code': -1,
+                'message': 'Erreur lors de la recuperation'
+            });
+        } else {
+            return res.jsonp(200, users);
+        }
+    });
+};
+
+exports.getAllUsers = function (req, res) {
+
+
+    User.find({}, function (err, users) {
         if (err) {
             return res.jsonp(500, {
                 'code': -1,

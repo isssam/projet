@@ -9,11 +9,10 @@
 
 var path = require('path');
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
-
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
@@ -26,7 +25,8 @@ module.exports = function(grunt) {
 
     try {
         yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
-    } catch (e) {}
+    } catch (e) {
+    }
     // Define the configuration for all the tasks
     grunt.initConfig({
 
@@ -128,14 +128,16 @@ module.exports = function(grunt) {
         // Empties folders to start fresh
         clean: {
             dist: {
-                files: [{
-                    dot: true,
-                    src: [
-                        '.tmp',
-                        '<%= yeoman.dist %>/*',
-                        '!<%= yeoman.dist %>/.git*'
-                    ]
-                }]
+                files: [
+                    {
+                        dot: true,
+                        src: [
+                            '.tmp',
+                            '<%= yeoman.dist %>/*',
+                            '!<%= yeoman.dist %>/.git*'
+                        ]
+                    }
+                ]
             },
             server: '.tmp'
         },
@@ -146,12 +148,14 @@ module.exports = function(grunt) {
                 browsers: ['last 1 version']
             },
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '.tmp/styles/',
-                    src: '{,*/}*.css',
-                    dest: '.tmp/styles/'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: '.tmp/styles/',
+                        src: '{,*/}*.css',
+                        dest: '.tmp/styles/'
+                    }
+                ]
             }
         },
 
@@ -247,23 +251,27 @@ module.exports = function(grunt) {
 
         imagemin: {
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/images',
-                    src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= yeoman.dist %>/images'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= yeoman.app %>/images',
+                        src: '{,*/}*.{png,jpg,jpeg,gif}',
+                        dest: '<%= yeoman.dist %>/images'
+                    }
+                ]
             }
         },
 
         svgmin: {
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/images',
-                    src: '{,*/}*.svg',
-                    dest: '<%= yeoman.dist %>/images'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= yeoman.app %>/images',
+                        src: '{,*/}*.svg',
+                        dest: '<%= yeoman.dist %>/images'
+                    }
+                ]
             }
         },
 
@@ -275,12 +283,14 @@ module.exports = function(grunt) {
                     removeCommentsFromCDATA: true,
                     removeOptionalTags: true
                 },
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>',
-                    src: ['*.html', 'views/{,*/}*.html'],
-                    dest: '<%= yeoman.dist %>'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= yeoman.app %>',
+                        src: ['*.html', 'views/{,*/}*.html'],
+                        dest: '<%= yeoman.dist %>'
+                    }
+                ]
             }
         },
 
@@ -311,24 +321,26 @@ module.exports = function(grunt) {
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: './',
-                    dest: '<%= yeoman.dist %>',
-                    src: [
-                        'app/**/*.{html,css,png,jpeg,GIF,jpg,eot,svg,ttf,woff}',
-                        'app/bower_components/**/*.js',
-                        'api/**/*',
-                        'models/**/*',
-                        'routes/**/*',
-                        'app.js',
-                        'Gruntfile.js',
-                        'package.json',
-                        'bower.json',
-                        '.bowerrc'
-                    ]
-                }]
+                files: [
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: './',
+                        dest: '<%= yeoman.dist %>',
+                        src: [
+                            'app/**/*.{html,css,png,jpeg,GIF,jpg,eot,svg,ttf,woff}',
+                            'app/bower_components/**/*.js',
+                            'api/**/*',
+                            'models/**/*',
+                            'routes/**/*',
+                            'app.js',
+                            'Gruntfile.js',
+                            'package.json',
+                            'bower.json',
+                            '.bowerrc'
+                        ]
+                    }
+                ]
             }
         },
 
@@ -344,25 +356,88 @@ module.exports = function(grunt) {
                 configFile: 'karma.conf.js',
                 singleRun: true
             }
+        },
+        'template': {
+            'process-configuration-template': {
+                'options': {
+                    'data': {
+                        'GENERATED_TEST': 'bbbbb',
+                        'GENERATED_LOGINTITLE': 'Veuillez vous connecter',
+                        'GENERATED_LOGINUSERNAME': 'Nom utilisateur',
+                        'GENERATED_LOGINPASSE': 'Mot de passe',
+                        'GENERATED_LOGINBUTTON': 'Connexion',
+                        'GENERATED_LOGINUP': 'Cliquez ici',
+                        'GENERATED_LOGINTEXT': 'pour créer un compte',
+                        'GENERATED_LOGINERROR': ' Mot de pass incorrect ! ',
+                        'GENERATED_REGISTRATIONTITLE': ' Inscription ',
+                        'GENERATED_REGISTRATIONUSERNAME': ' Pseudo',
+                        'GENERATED_REGISTRATIONNAME': ' Nom ',
+                        'GENERATED_REGISTRATIONEMAIL': ' Email ',
+                        'GENERATED_REGISTRATIONPASSE': ' Mot de passe ',
+                        'GENERATED_REGISTRATIONPASSECONF': ' Entrez de nouveau mot le passe ',
+
+                        'GENERATED_REGISTRATIONBUTONOK': ' Valider ',
+                        'GENERATED_REGISTRATIONBUTONNO': ' Annuler ',
+
+                        'GENERATED_TITLE': 'RECLAMATION',
+                        'GENERATED_HEADER1': 'Se deconecter',
+                        'GENERATED_SLIDER1': 'Reclamation',
+                        'GENERATED_SLIDER2': 'Detail',
+                        'GENERATED_SLIDER3': 'Utilisateur',
+                        'GENERATED_SLIDER4': 'Deconexion',
+                        'GENERATED_TABLETITLE': 'RECLAMATIONS',
+                        'GENERATED_TABLESEARCH': 'Recherche',
+                        'GENERATED_NEWBUTTON': 'Nouvelle Reclamation',
+                        'GENERATED_TITLE1': 'Libelle',
+                        'GENERATED_TITLE2': 'Categorie',
+                        'GENERATED_TITLE3': 'Description',
+                        'GENERATED_TITLE4': 'Statut',
+                        'GENERATED_TITLE5': 'Technicien Statut',
+                        'GENERATED_TITLE6': 'Action',
+                        'GENERATED_TITLE7': 'Technicien',
+                        'GENERATED_TITLE8': 'Message',
+                        'GENERATED_TITLE9': 'Message pour client',
+                        'GENERATED_TABLENEXT': 'Suivant',
+                        'GENERATED_TABLEBACK': 'Precedent',
+
+                        'GENERATED_DELETTITLE': 'Suppression',
+                        'GENERATED_ADDTITLE': 'Nouveau',
+                        'GENERATED_EDITTITLE': 'Mise à jour',
+
+                        'GENERATED_ALERT': 'Voulez vous supprimer cette reclamation!!',
+
+                        'GENERATED_DETAILTITLE': 'Detail reclamtion',
+                        'GENERATED_DETAILINFO': 'Info reclamation',
+                        'GENERATED_Role': 'Role',
+                        'GENERATED_USERS': 'Liste des utilisateurs'
+                    }
+                },
+
+                'files': {
+                    './app/configuration.json': ['./app/configuration.json.tpl']
+                }
+
+
+            }
         }
     });
 
 
-    grunt.registerTask('serve', function(target) {
-       grunt.task.run([
+    grunt.registerTask('serve', function (target) {
+        grunt.task.run([
             'clean:server',
             'bowerInstall',
             'autoprefixer',
+            'template:process-configuration-template',
             'express:livereload',
             'watch'
         ]);
     });
 
-    grunt.registerTask('server', function(target) {
+    grunt.registerTask('server', function (target) {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
         grunt.task.run(['serve:' + target]);
     });
-
 
 
     grunt.registerTask('build-dev', [
@@ -401,8 +476,8 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'newer:jshint',
         'test',
-        'build'
+        'build',
+        'template'
     ]);
 };

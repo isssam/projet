@@ -1,0 +1,55 @@
+{
+    "test" : "<%- GENERATED_TEST %>",
+    "loginTitle" : "<%- GENERATED_LOGINTITLE %>",
+    "loginUsername" : "<%- GENERATED_LOGINUSERNAME %>",
+    "loginPasse" : "<%- GENERATED_LOGINPASSE %>",
+    "loginButton" : "<%- GENERATED_LOGINBUTTON %>",
+    "loginUp" : "<%- GENERATED_LOGINUP %>",
+    "loginText" : "<%- GENERATED_LOGINTEXT %>",
+    "loginError" : "<%- GENERATED_LOGINERROR %>",
+
+         "registrationTitle" : "<%- GENERATED_REGISTRATIONTITLE %>",
+        "registrationUsername" : "<%- GENERATED_REGISTRATIONUSERNAME %>",
+        "registrationName" : "<%- GENERATED_REGISTRATIONNAME %>",
+        "registrationEmail" : "<%- GENERATED_REGISTRATIONEMAIL %>",
+        "registrationPasse" : "<%- GENERATED_REGISTRATIONPASSE %>",
+        "registrationPasseConf" : "<%- GENERATED_REGISTRATIONPASSECONF %>",
+        "registrationTypePasse" : "<%- GENERATED_REGISTRATIONTYPEPASSE %>",
+        "registrationTypePasseConf" : "<%- GENERATED_REGISTRATIONTYPEPASSECONF %>",
+        "registrationButonOk" : "<%- GENERATED_REGISTRATIONBUTONOK %>",
+        "registrationButonNo" : "<%- GENERATED_REGISTRATIONBUTONNO %>",
+
+
+    "title" : "<%- GENERATED_TITLE %>",
+    "header1" : "<%- GENERATED_HEADER1 %>",
+    "slider1" : "<%- GENERATED_SLIDER1 %>",
+    "slider2" : "<%- GENERATED_SLIDER2 %>",
+    "slider3" : "<%- GENERATED_SLIDER3 %>",
+    "slider4" : "<%- GENERATED_SLIDER4 %>",
+
+    "tableTitle" : "<%- GENERATED_TABLETITLE %>",
+    "tableSearch" : "<%- GENERATED_TABLESEARCH %>",
+    "newButton" : "<%- GENERATED_NEWBUTTON %>",
+    "Title1" : "<%- GENERATED_TITLE1 %>",
+    "Title2" : "<%- GENERATED_TITLE2 %>",
+    "Title3" : "<%- GENERATED_TITLE3 %>",
+    "Title4" : "<%- GENERATED_TITLE4 %>",
+    "Title5" : "<%- GENERATED_TITLE5 %>",
+    "Title6" : "<%- GENERATED_TITLE6 %>",
+    "Title7" : "<%- GENERATED_TITLE7 %>",
+    "Title8" : "<%- GENERATED_TITLE8 %>",
+    "Title9" : "<%- GENERATED_TITLE9 %>",
+    "tableNext" : "<%- GENERATED_TABLENEXT %>",
+    "tableBack" : "<%- GENERATED_TABLEBACK %>",
+
+    "deletTitle" : "<%- GENERATED_DELETTITLE %>",
+    "addTitle" : "<%- GENERATED_ADDTITLE %>",
+    "editTitle" : "<%- GENERATED_EDITTITLE %>",
+    "alert" : "<%- GENERATED_ALERT %>",
+
+    "detailTitle" : "<%- GENERATED_DETAILTITLE %>",
+    "detailInfo" : "<%- GENERATED_DETAILINFO %>",
+    "role" : "<%- GENERATED_Role %>",
+    "users" : "<%- GENERATED_USERS %>"
+
+}

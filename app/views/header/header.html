@@ -1,93 +1,95 @@
 <!-- start: Header -->
 <div class="navbar" data-ng-init='init()'>
-<div class="navbar-inner">
-<div class="container-fluid">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-</a>
-    <a class="brand" href="./index.html"><span>Réclamation(base)</span></a>
-
-    <!-- start: Header Menu -->
-<div class="nav-no-collapse header-nav">
-<ul class="nav pull-right">
-<li class="dropdown hidden-phone">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="">
-    <i class="halflings-icon white warning-sign"></i>
-    </a>
-    <ul class="dropdown-menu notifications">
-        <li>
-            <span class="dropdown-menu-title"> 11 notifications</span>
-        </li>
-        <li>
-            <a href="">
-                + <i class="halflings-icon white user"></i> <span class="message">New user registration</span> <span
-                    class="time">1 min</span>
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse"
+               data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </a>
-        </li>
-        <li>
-            <a href="">
-                + <i class="halflings-icon white comment"></i> <span class="message">New comment</span> <span
-                    class="time">7 min</span>
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-menu-sub-footer">vois tout les notifications</a>
-        </li>
-    </ul>
-</li>
-<!-- start: Notifications Dropdown -->
-<!-- end: Notifications Dropdown -->
-<!-- start: Message Dropdown -->
-<li class="dropdown hidden-phone">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="">
-    <i class="halflings-icon white envelope"></i>
-    </a>
-    <ul class="dropdown-menu messages">
-        <li>
-            <span class="dropdown-menu-title">9 messages</span>
-        </li>
-        <li>
-            <a href="">
-                <span class="avatar"><img src="./images/img/avatar.jpg" alt="Avatar"/></span>
-										<span class="header">
-											<span class="from">
-										    	Utilisateur
-										     </span>
-											<span class="time">
-										    	6 min
-										    </span>
-										</span>
-                                        <span class="message">
-                                           message message message
-                                        </span>
-            </a>
-        </li>
+            <a class="brand" href="./index.html"><span> {{config.title}}</span></a>
 
-        <li>
-            <a class="dropdown-menu-sub-footer">voir tout les messages</a>
-        </li>
-    </ul>
-</li>
-<!-- end: Message Dropdown -->
+            <!-- start: Header Menu -->
+            <div class="nav-no-collapse header-nav">
+                <ul class="nav pull-right">
+                    <!--<li class="dropdown hidden-phone">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="">
+                        <i class="halflings-icon white warning-sign"></i>
+                        </a>
+                        <ul class="dropdown-menu notifications">
+                            <li>
+                                <span class="dropdown-menu-title"> 11 notifications</span>
+                            </li>
+                            <li>
+                                <a href="">
+                                    + <i class="halflings-icon white user"></i> <span class="message">New user registration</span> <span
+                                        class="time">1 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    + <i class="halflings-icon white comment"></i> <span class="message">New comment</span> <span
+                                        class="time">7 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-menu-sub-footer">voir tout les notifications</a>
+                            </li>
+                        </ul>
+                    </li>-->
+                    <!-- start: Notifications Dropdown -->
+                    <!-- end: Notifications Dropdown -->
+                    <!-- start: Message Dropdown -->
+                    <!--<li class="dropdown hidden-phone">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="">
+                        <i class="halflings-icon white envelope"></i>
+                        </a>
+                        <ul class="dropdown-menu messages">
+                            <li>
+                                <span class="dropdown-menu-title">9 messages</span>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <span class="avatar"></span>
+                                                            <span class="header">
+                                                                <span class="from">
+                                                                    Utilisateur
+                                                                 </span>
+                                                                <span class="time">
+                                                                    6 min
+                                                                </span>
+                                                            </span>
+                                                            <span class="message">
+                                                               message message message
+                                                            </span>
+                                </a>
+                            </li>
 
-    <!-- start: User Dropdown -->
-<li class="dropdown">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="">
-        <i class="halflings-icon white user"></i> NOm de User(a voir)
-        <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-        <li><a href=""><i class="halflings-icon white user"></i> Profile</a></li>
-        <li><a href=""><i class="halflings-icon white off"></i>Se Déconnecter</a></li>
-    </ul>
-</li>
-<!-- end: User Dropdown -->
-</ul>
-</div>
-<!-- end: Header Menu -->
+                            <li>
+                                <a class="dropdown-menu-sub-footer">voir tout les messages</a>
+                            </li>
+                        </ul>
+                    </li>-->
+                    <!-- end: Message Dropdown -->
 
-</div>
-</div>
+                    <!-- start: User Dropdown -->
+                    <li class="dropdown">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="">
+                            <i class="halflings-icon white user"></i> {{userConnected.fullName}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!--<li><a href=""><i class="halflings-icon white user"></i> Profile</a></li>-->
+                            <li><a ng-click="deconn()"><i class="halflings-icon white off"></i>{{config.header1}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- end: User Dropdown -->
+                </ul>
+            </div>
+            <!-- end: Header Menu -->
+
+        </div>
+    </div>
 </div>

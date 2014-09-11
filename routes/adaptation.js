@@ -6,9 +6,6 @@
 
 module.exports = function (app, passport) {
 
-    var multipart = require('connect-multiparty');
-    var multipartMiddleware = multipart();
-
 
     var productDAO = require('../api/dao/productDAO');
     var userDAO = require('../api/dao/userDAO');
@@ -21,6 +18,7 @@ module.exports = function (app, passport) {
         console.log('in isloggedIN');
         console.log(req.isAuthenticated());
         if (req.isAuthenticated())
+
             return next();
 
         // if they aren't redirect them to the home page
@@ -29,6 +27,50 @@ module.exports = function (app, passport) {
             message: 'unauthrized'
         });
     }
+
+    function isLoggedInAdmin(req, res, next) {
+        var errMessage = {};
+
+
+        if (req.isAuthenticated()) {
+            if (req.user.role !== 'admin') {
+                errMessage = {
+                    message: 'acces interdit',
+                    code: 2
+                };
+                res.send(401, errMessage);
+            } else {
+                return next();
+            }
+        } else {
+            errMessage = {
+                message: 'non authentifier',
+                code: 1
+            };
+            res.send(401, errMessage);
+        }
+    }
+
+    app.get('/adminService', isLoggedInAdmin, function (req, res) {
+        res.jsonp(200, req.user);
+    });
+
+    app.get('/logout', function (req, res) {
+        if (req.isAuthenticated()) {
+            req.logout();
+            //res.redirect('/login');
+            console.log(req)
+            res.jsonp(200, { success: true});
+
+
+            // if they aren't redirect them to the home page
+        } else {
+            res.jsonp(400, { success: false});
+
+        }
+
+
+    });
 
     app.post('/test', function (req, res) {
         res.send(200, req.body);
@@ -40,9 +82,14 @@ module.exports = function (app, passport) {
 
     app.post('/ajouterUser', userDAO.addItem);
     app.post('/getAllUser', userDAO.getAllUsers);
+
+    app.post('/edituser', userDAO.updateRole);
     app.post('/getUserById', userDAO.findById);
+    app.post('/getAllTech', userDAO.getAllTech);
 
     app.post('/ajoutercomp', complaintDAO.addItem);
+
+    //************isLoggedInAdmin,... ajouter après
     app.post('/getAllcomp', complaintDAO.getAllComplaints);
     app.post('/getcompById', complaintDAO.getComplaintById);
     app.post('/deleteComp', complaintDAO.remove);
@@ -56,7 +103,7 @@ module.exports = function (app, passport) {
     //service passport
     //passport service signin
     app.post('/signup', passport.authenticate('local-signup', {
-            failureRedirect: '/#/',
+            failureRedirect: '/',
             failureFlash: true
         }),
         function (req, res) {
@@ -65,8 +112,8 @@ module.exports = function (app, passport) {
         });
     //passport service login
     app.post('/login', passport.authenticate('local-login', {
-            failureRedirect: '/#/'
-            //failureFlash: true
+            failureRedirect: '/',
+            failureFlash: true
         }),
         function (req, res) {
             if (req.user) {

@@ -1434,7 +1434,7 @@ ul.chat li.left .message .arrow {
     position: absolute;
     top: 5px;
     left: -20px;
-    background: url(./images/img/chat-left.png) no-repeat 0px 0px;
+    background: url('../../images/img/chat-left.png') no-repeat 0px 0px;
 }
 
 ul.chat li.right .message .arrow {
@@ -1444,7 +1444,7 @@ ul.chat li.right .message .arrow {
     position: absolute;
     top: 5px;
     right: -20px;
-    background: url(./images/img/chat-right.png) no-repeat 0px 0px;
+    background: url('../../images/img/chat-right.png') no-repeat 0px 0px;
 }
 
 ul.chat li.right .message {

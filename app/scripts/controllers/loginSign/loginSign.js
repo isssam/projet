@@ -1,7 +1,9 @@
 'use strict';
 angular.module('projetApp').controller('LoginSignCtrl',
-    function ($scope, $http, $location) {
+    function ($scope, $http, $location, $rootScope, serviceGeneral) {
         $scope.state = false;
+        $scope.newUser = {};
+        $scope.errloginAction = false;
         $scope.init = function () {
 
 
@@ -9,139 +11,147 @@ angular.module('projetApp').controller('LoginSignCtrl',
             $scope.loginForm = true;
             $scope.recoverPasswordForm = false;
             $scope.createAccountForm = false;
-            $scope.switchErrOff();
-            /*  // var socket = io.connect('http://localhost:3000');
-             // socket.on('news', function (data) {
-             //   if (data.onlineState) {
-             //     $scope.state = data.onlineState;
-             //   } else {
-             //     $scope.state = data.onlineState;
-             //   }
-             //   $scope.$digest();
-             //   socket.emit('my other event', { my: 'data' });
-             // });
-             };
+            //$scope.switchErrOff();
+            // var socket = io.connect('http://localhost:3000');
+            // socket.on('news', function (data) {
+            //   if (data.onlineState) {
+            //     $scope.state = data.onlineState;
+            //   } else {
+            //     $scope.state = data.onlineState;
+            //   }
+            //   $scope.$digest();
+            //   socket.emit('my other event', { my: 'data' });
+            // });
+        };
 
-             $scope.creatAccount = function() {
-             console.log(serviceGeneral.verifEmail($scope.signEmail));
-             if (serviceGeneral.verifEmail($scope.signEmail) && serviceGeneral.verifPassword($scope.signPassword) && serviceGeneral.verifName($scope.signName) && serviceGeneral.verifLogin($scope.signLogin) && $scope.signPassword === $scope.signRPassword) {
-             console.log('tout va biennn');
-             $scope.switchErrOff();
-             var data = {
-             login: $scope.signLogin,
-             password: $scope.signPassword,
-             fullName: $scope.signName,
-             email: $scope.signEmail
-             };
-             console.log(data);
-             $http.post(configuration.URL_REQUEST + '/signup', data)
-             .success(function(data) {
-             console.log('success sign in up');
-             console.log(data);
-             $location.path('/home');
-             })
-             .error(function(data) {
-             console.log('erreur interne');
-             console.log(data);
-             });
-             } else {
-             $scope.checkSignFields();
-             }
-             };
-
-             $scope.authenticate = function() {
-             if (serviceGeneral.verifLogin($scope.loginLogin) && serviceGeneral.verifPassword($scope.passwordLogin)) {
-             $scope.switchErrOff();
-             var data = {
-             login: $scope.loginLogin,
-             password: $scope.passwordLogin
-             }
-             $http.post(configuration.URL_REQUEST + '/login', data)
-             .success(function(data) {
-             console.log(data);
-             $location.path('/home')
-             })
-             .error(function(data) {
-             console.log(data);
-             $scope.errloginAction = true;
-             });
-             } else {
-             console.log('err');
-             $scope.errloginAction = true;
-             }
-             };
-
-             $scope.switch = function() {
-             $scope.loginForm = !$scope.loginForm;
-             $scope.recoverPasswordForm = !$scope.recoverPasswordForm;
-             $scope.createAccountForm = false;
-             };
-             $scope.createAccount = function() {
-             $scope.loginForm = false;
-             $scope.recoverPasswordForm = false;
-             $scope.createAccountForm = true;
-             };
-             $scope.switchAuth = function() {
-             $scope.loginForm = true;
-             $scope.recoverPasswordForm = false;
-             $scope.createAccountForm = false;
-             };
-             $scope.checkSignFields = function() {
-             if (!serviceGeneral.verifEmail($scope.signEmail)) {
-             $scope.errEmail = true;
-             } else {
-             $scope.errEmail = false;
-             }
-             if (!serviceGeneral.verifLogin($scope.signLogin)) {
-             $scope.errLogin = true;
-             } else {
-             $scope.errLogin = false;
-             }
-             if (!serviceGeneral.verifName($scope.signName)) {
-             $scope.errName = true;
-             } else {
-             $scope.errName = false;
-             }
-             if (!serviceGeneral.verifPassword($scope.signPassword) || $scope.signPassword !== $scope.signRPassword) {
-             $scope.errPassword = true;
-             } else {
-             $scope.errPassword = false;
-             }
-             };*/
-            $scope.switchErrOff = function () {
-                $scope.errConfirmation = false;
-                $scope.errEmail = false;
-                $scope.errPassword = false;
-                $scope.errName = false;
-                $scope.errLogin = false;
-                $scope.errloginAction = false;
-            };
-        }
-
-        $scope.authenticate = function () {
-            /* if (serviceGeneral.verifLogin($scope.loginLogin) && serviceGeneral.verifPassword($scope.passwordLogin)) {
-             $scope.switchErrOff();
+        $scope.creatAccountt = function () {
+            /*   console.log(serviceGeneral.verifEmail($scope.signEmail));
+             if (serviceGeneral.verifEmail($scope.newUser.signEmail) && serviceGeneral.verifPassword($scope.newUser.signPassword) && serviceGeneral.verifName($scope.newUser.signName) && serviceGeneral.verifLogin($scope.newUser.signLogin) && $scope.newUser.signPassword === $scope.newUser.signRPassword) {
              */
-            var data = {
-                login: $scope.loginLogin,
-                password: $scope.passwordLogin
-            }
-            $http.post('/login', data)
+            console.log('tout va biennn');
+            //  $scope.switchErrOff();
+
+            console.log($scope.newUser);
+
+            $http.post('/signup', $scope.newUser)
                 .success(function (data) {
-                    console.log(data);
-                    $location.path('/home')
+                    console.log('success sign in up');
+
+                    //  console.log(data);
+                    // $location.path('/home');
                 })
                 .error(function (data) {
+                    console.log('erreur interne');
                     console.log(data);
-                    $scope.errloginAction = true;
                 });
         }
-        /* else {
+        /*else {
+         $scope.checkSignFields();
+         }
+         };*/
+
+        $scope.authenticate = function () {
+            $scope.errloginAction = false;
+            if (serviceGeneral.verifLogin($scope.login) && serviceGeneral.verifPassword($scope.password)) {
+                // $scope.switchErrOff();
+
+                var data = {
+                    login: $scope.login,
+                    password: $scope.password
+                }
+
+                $http.post('/login', data)
+                    .success(function (dataUser) {
+                        console.log('success controlleur');
+                        console.log(dataUser);
+
+                        $location.path('/home')
+                    })
+                    .error(function (data) {
+                        console.log('errreur login');
+                        $scope.errloginAction = true;
+
+                    });
+            } else {
+                console.log('err');
+                $scope.errloginAction = true;
+            }
+        };
+
+        $scope.switch = function () {
+            $scope.loginForm = !$scope.loginForm;
+            $scope.recoverPasswordForm = !$scope.recoverPasswordForm;
+            $scope.createAccountForm = false;
+        };
+        $scope.createAccount = function () {
+            $scope.loginForm = false;
+            $scope.recoverPasswordForm = false;
+            $scope.createAccountForm = true;
+        };
+        $scope.switchAuth = function () {
+            $scope.loginForm = true;
+            $scope.recoverPasswordForm = false;
+            $scope.createAccountForm = false;
+        };
+        $scope.checkSignFields = function () {
+            if (!serviceGeneral.verifEmail($scope.signEmail)) {
+                $scope.errEmail = true;
+            } else {
+                $scope.errEmail = false;
+            }
+            if (!serviceGeneral.verifLogin($scope.signLogin)) {
+                $scope.errLogin = true;
+            } else {
+                $scope.errLogin = false;
+            }
+            if (!serviceGeneral.verifName($scope.signName)) {
+                $scope.errName = true;
+            } else {
+                $scope.errName = false;
+            }
+            if (!serviceGeneral.verifPassword($scope.signPassword) || $scope.signPassword !== $scope.signRPassword) {
+                $scope.errPassword = true;
+            } else {
+                $scope.errPassword = false;
+            }
+        };
+        $scope.switchErrOff = function () {
+            $scope.errConfirmation = false;
+            $scope.errEmail = false;
+            $scope.errPassword = false;
+            $scope.errName = false;
+            $scope.errLogin = false;
+            $scope.errloginAction = false;
+        };
+
+
+        /*$scope.authenticate = function () {
+         if (serviceGeneral.verifLogin($scope.loginLogin) && serviceGeneral.verifPassword($scope.passwordLogin)) {
+         $scope.switchErrOff();
+
+         var data = {
+         login: $scope.loginLogin,
+         password: $scope.passwordLogin
+         }
+         $http.post('/login', data)
+         .success(function (data) {
+         console.log(data);
+
+         $location.path('/home')
+         })
+         .error(function (data) {
+         console.log(data);
+         $scope.errloginAction = true;
+         });
+
+         }
+         else {
          console.log('err');
          $scope.errloginAction = true;
 
 
-         }}*/
+         }
+         }*/
 
     });
 

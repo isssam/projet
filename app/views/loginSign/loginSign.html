@@ -4,50 +4,117 @@
         <div class="row-fluid">
             <div class="login-box">
                 <div class="icons">
-                    <a href="./home"><i class="halflings-icon home"></i></a>
+                    <a href=""><i class="halflings-icon home"></i></a>
                     <a href="#"><i class="halflings-icon cog"></i></a>
                 </div>
-                <h2>Login to your account</h2>
+                <h2>{{config.loginTitle}}</h2>
 
                 <form class="form-horizontal" action="" method="post"/>
+                <div ng-if='errloginAction' class="alert alert-error" role="alert">{{config.loginError}}</div>
                 <fieldset>
 
                     <div class="input-prepend" title="Username">
                         <span class="add-on"><i class="halflings-icon user"></i></span>
-                        <input ng-model='loginLogin' class="input-large span10" name="username" id="username"
+                        <input ng-model='login' class="input-large span10" name="{{config.loginUsername}}" id="username"
                                type="text" placeholder="type username"/>
                     </div>
                     <div class="clearfix"></div>
 
                     <div class="input-prepend" title="Password">
                         <span class="add-on"><i class="halflings-icon lock"></i></span>
-                        <input ng-model='passwordLogin' class="input-large span10" name="password" id="password"
+                        <input ng-model='password' class="input-large span10" name="{{config.loginPasse}}" id="password"
                                type="password" placeholder="type password"/>
                     </div>
                     <div class="clearfix"></div>
 
-                    <label class="remember" for="remember"><input type="checkbox" id="remember"/>Remember me</label>
-
+                    <!-- <label class="remember" for="remember"><input type="checkbox" id="remember"/>Se rappeler de moi</label>
+ -->
                     <div class="button-login">
-                        <button type="submit" class="btn btn-primary" ng-click='authenticate()'>Login</button>
+                        <button type="submit" class="btn btn-primary" ng-click='authenticate()'>{{config.loginButton}}
+                        </button>
                     </div>
                     <div class="clearfix"></div>
                     </form>
                     <hr/>
-                    <h3>Forgot Password?</h3>
 
                     <p>
-                        No problem, <a href="#">click here</a> to get a new password.
+                        <a href="" data-toggle="modal" data-target="#myModalNewUser">{{config.loginUp}}</a>
+                        {{config.loginText}}
                     </p>
                 </fieldset>
             </div>
             <!--/span-->
         </div>
         <!--/row-->
+        <div class="modal hide fade" id="myModalNewUser">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>{{config.registrationTitle}}</h3>
+            </div>
+            <div class="modal-body">
 
+                <div class="control-group">
+                    <label class="control-label">{{config.registrationUsername}}</label>
+
+                    <div class="controls">
+                        <input ng-model="newUser.username" class="input-xlarge " type="text">
+                    </div>
+                    <span class='help-block redSpan'
+                          ng-show='errLogin'>Le login est obligatoire (6,32) caractères</span>
+
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{config.registrationName}}</label>
+
+                    <div class="controls">
+                        <input ng-model="newUser.fullName" class="input-xlarge " type="text"/>
+                    </div>
+                    <span class='help-block redSpan' ng-show='errName'>Le nom est vide ou contient des caractères spéciaux</span>
+
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{config.registrationEmail}}</label>
+
+                    <div class="controls">
+                        <input ng-model="newUser.email" class="input-xlarge " type="text"/>
+                    </div>
+                    <span class='help-block redSpan' ng-show='errEmail'>L'email est vide ou n'est pas valide</span>
+
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">{{config.registrationPasse}}</label>
+
+                    <div class="controls">
+                        <input ng-model="newUser.password" class="input-xlarge " id="password"
+                               type="password"/>
+                    </div>
+                    <span class='help-block redSpan' ng-show='errPassword'>Le mot de pass est obligatoire (8,32) caractères</span>
+
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{config.registrationPasseConf}}</label>
+
+                    <div class="controls">
+                        <input ng-model="newUser.signRPassword" class="input-xlarge " id="password"
+                               type="password"/>
+                    </div>
+                    <span class='help-block redSpan' ng-show='errConfirmation'>La confirmation doit correspondre au mot de passe entré</span>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary" ng-click="creatAccountt()" data-dismiss="modal">{{config.registrationButonOk}}</a>
+                <a href="" class="btn" data-dismiss="modal" ng-click="clearComp()">{{config.registrationButonNo}}</a>
+
+            </div>
+        </div>
     </div>
     <!--/fluid-row-->
 
 </div><!--/.fluid-container-->
 
 <!-- start: JavaScript-->
+
