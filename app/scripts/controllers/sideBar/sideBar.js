@@ -44,7 +44,7 @@ angular.module('projetApp').controller('SideBarCtrl',
 
                 .success(function (res) {
                     console.log('goood');
-                    console.log(res);
+
                     $rootScope.userConnected.role = ''
                     $location.path('/')
 

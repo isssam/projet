@@ -58,8 +58,7 @@ module.exports = function (app, passport) {
     app.get('/logout', function (req, res) {
         if (req.isAuthenticated()) {
             req.logout();
-            //res.redirect('/login');
-            console.log(req)
+
             res.jsonp(200, { success: true});
 
 
@@ -76,23 +75,20 @@ module.exports = function (app, passport) {
         res.send(200, req.body);
     });
 
-    app.post('/ajouterProduit', productDAO.addItem);
-    app.post('/getAllProducts', productDAO.getAllProducts);
-    app.post('/getProductsById', productDAO.findById);
 
     app.post('/ajouterUser', userDAO.addItem);
-    app.post('/getAllUser', userDAO.getAllUsers);
+    app.post('/getAllUser', isLoggedInAdmin, userDAO.getAllUsers);
 
-    app.post('/edituser', userDAO.updateRole);
+    app.post('/edituser', isLoggedInAdmin, userDAO.updateRole);
     app.post('/getUserById', userDAO.findById);
     app.post('/getAllTech', userDAO.getAllTech);
 
     app.post('/ajoutercomp', complaintDAO.addItem);
 
-    //************isLoggedInAdmin,... ajouter après
-    app.post('/getAllcomp', complaintDAO.getAllComplaints);
+    //************isLoggedInAdmin,...
+    app.post('/getAllcomp', isLoggedInAdmin, complaintDAO.getAllComplaints);
     app.post('/getcompById', complaintDAO.getComplaintById);
-    app.post('/deleteComp', complaintDAO.remove);
+    app.post('/deleteComp', isLoggedInAdmin, complaintDAO.remove);
     app.post('/getAllComplaintsByUserId', complaintDAO.findAllComplaintsByUserId);
 
     app.post('/editerCus', cusDAO.update);

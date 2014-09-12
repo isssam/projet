@@ -13,18 +13,15 @@ angular.module('projetApp').controller('detailCtrl',
 
         $scope.init = function () {
 
-            console.warn('cussss', $scope.cusdetail);
-            console.warn('searchhhh', $location.search().id);
             // console.warn('id=',$location.search().id);
             console.log($rootScope.userConnected);
             $scope.idComp.idComplaint = $location.search().id;
 
-            console.warn('idvar=', $scope.idComp);
 
 
             $http.post('/getCusByComplaintId', {idComplaint: $location.search().id})
                 .success(function (data) {
-                    console.log(data);
+
                     $scope.listCus = data;
 
                 }).error(function () {
@@ -38,7 +35,7 @@ angular.module('projetApp').controller('detailCtrl',
         $scope.getAllTech = function () {
             $http.post('/getAllUser')
                 .success(function (data) {
-                    console.log(data);
+
                     $scope.listUser = data;
                     $scope.selectedTech = $scope.listUser[0];
 
@@ -55,7 +52,6 @@ angular.module('projetApp').controller('detailCtrl',
 
         $scope.editerCus = function () {
 
-            console.warn('statut', $scope.listCus[$scope.listCus.length - 1]);
 
             $scope.newCuss.idUser = $rootScope.userConnected._id;
             $scope.newCuss.idComplaint = $location.search().id;
@@ -65,7 +61,7 @@ angular.module('projetApp').controller('detailCtrl',
             $http.post('/editerCus', $scope.newCuss)
                 .success(function (data) {
                     console.log('success sign in up');
-                    console.log(data);
+
                     $scope.editComplaint = {};
                     $scope.newCuss = {};
                     $scope.init();

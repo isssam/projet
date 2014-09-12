@@ -11,44 +11,23 @@ angular.module('projetApp').controller('LoginSignCtrl',
             $scope.loginForm = true;
             $scope.recoverPasswordForm = false;
             $scope.createAccountForm = false;
-            //$scope.switchErrOff();
-            // var socket = io.connect('http://localhost:3000');
-            // socket.on('news', function (data) {
-            //   if (data.onlineState) {
-            //     $scope.state = data.onlineState;
-            //   } else {
-            //     $scope.state = data.onlineState;
-            //   }
-            //   $scope.$digest();
-            //   socket.emit('my other event', { my: 'data' });
-            // });
+
         };
 
         $scope.creatAccountt = function () {
-            /*   console.log(serviceGeneral.verifEmail($scope.signEmail));
-             if (serviceGeneral.verifEmail($scope.newUser.signEmail) && serviceGeneral.verifPassword($scope.newUser.signPassword) && serviceGeneral.verifName($scope.newUser.signName) && serviceGeneral.verifLogin($scope.newUser.signLogin) && $scope.newUser.signPassword === $scope.newUser.signRPassword) {
-             */
-            console.log('tout va biennn');
-            //  $scope.switchErrOff();
 
-            console.log($scope.newUser);
 
             $http.post('/signup', $scope.newUser)
                 .success(function (data) {
                     console.log('success sign in up');
 
-                    //  console.log(data);
-                    // $location.path('/home');
                 })
                 .error(function (data) {
                     console.log('erreur interne');
                     console.log(data);
                 });
         }
-        /*else {
-         $scope.checkSignFields();
-         }
-         };*/
+
 
         $scope.authenticate = function () {
             $scope.errloginAction = false;
@@ -63,7 +42,7 @@ angular.module('projetApp').controller('LoginSignCtrl',
                 $http.post('/login', data)
                     .success(function (dataUser) {
                         console.log('success controlleur');
-                        console.log(dataUser);
+
 
                         $location.path('/home')
                     })

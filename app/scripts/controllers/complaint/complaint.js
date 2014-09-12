@@ -23,12 +23,12 @@ angular.module('projetApp').controller('CompCtrl',
 
 
         $rootScope.$watch('userConnected ', function () {
-            console.log('event recieved');
+
             $scope.init();
-            console.log($rootScope.userConnected);
+
         });
         $scope.init = function () {
-            // console.warn('id couren: ', $rootScope.userConnected._id);
+
             if ($rootScope.userConnected.role === 'admin') {
                 $http.post('/getAllcomp')
                     .success(function (data) {
@@ -39,7 +39,7 @@ angular.module('projetApp').controller('CompCtrl',
                     }).error(function () {
                         console.log('une erreur');
                     });
-                console.log('admiin');
+
             }
             else {
                 if ($rootScope.userConnected.role === 'tech')
@@ -48,32 +48,22 @@ angular.module('projetApp').controller('CompCtrl',
                     $scope.isclient = true;
 
                 $http.post('/getAllComplaintsByUserId', {idUser: $rootScope.userConnected._id})
-                    // $http.post('/getAllcomp')
+
                     .success(function (data) {
-                        console.log(data);
+
                         $scope.listcomp = data;
 
                     }).error(function () {
                         console.log('une erreur');
                     });
             }
-            /*$http.post('http://localhost:3000/getAllcomp')
-             .success(function (data) {
-             console.log(data);
-             $scope.listcomp = data;
 
-
-             }).error(function () {
-             console.log('une erreur');
-             });*/
             $scope.getAllTech();
 
-            console.warn('utilisateur courrent 2:', $rootScope.userConnected);
+
         };
 
-        /* $scope.statusArrayFilter = function (stat) {
-         return (status.indexOf(item.cuss.indexOf(idStatus)) );
-         };*/
+
         $scope.getAllTech = function () {
             $http.post('/getAllTech')
                 .success(function (data) {
@@ -89,12 +79,10 @@ angular.module('projetApp').controller('CompCtrl',
         };
 
         $scope.addComp = function () {
-            console.warn('Etat', $scope.state.indexOf($scope.selectedState));
-
 
             $scope.newComplaint.state = $scope.state.indexOf($scope.selectedState);
             $scope.newComplaint.idUser = $rootScope.userConnected._id;
-            console.log($scope.newComplaint);
+
             $http.post('/ajoutercomp', $scope.newComplaint)
                 .success(function (data) {
                     $scope.newComplaint = {};
@@ -111,8 +99,6 @@ angular.module('projetApp').controller('CompCtrl',
 
         $scope.editerCus = function () {
 
-            console.warn('statut', $scope.statusTechTech.indexOf($scope.selectedStatusTech));
-            console.warn('statut actuelle ', $scope.editComplaint.cuss[0].idStatus);
 
             $scope.newCuss.idComplaint = $scope.editComplaint._id;
             $scope.newCuss.idUser = $scope.selectedTech._id;
@@ -123,11 +109,11 @@ angular.module('projetApp').controller('CompCtrl',
                 $scope.newCuss.idStatus = $scope.status.indexOf($scope.selectedStatus);
                 $scope.newCuss.statustech = $scope.status.indexOf($scope.selectedStatus);
             }
-            console.log($scope.newCuss);
+
             $http.post('/editerCus', $scope.newCuss)
                 .success(function (data) {
                     console.log('success sign in up');
-                    console.log(data);
+
                     $scope.editComplaint = {};
                     $scope.newCuss = {};
                     $scope.init();
@@ -141,7 +127,7 @@ angular.module('projetApp').controller('CompCtrl',
             $http.post('/deleteComp', data)
                 .success(function (data) {
                     console.log('success remove');
-                    console.log(data);
+
                     $scope.init();
 
                 })
@@ -160,7 +146,6 @@ angular.module('projetApp').controller('CompCtrl',
             $scope.selectedStatus = '';
             $scope.selectedStatusTech = '';
         };
-
 
 
     });

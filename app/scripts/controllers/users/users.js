@@ -27,10 +27,10 @@ angular.module('projetApp').controller('usersCtrl',
         $rootScope.$watch('userConnected ', function () {
             console.log('event recieved');
             $scope.init();
-            console.log($rootScope.userConnected);
+
         });
         $scope.init = function () {
-            // console.warn('id couren: ', $rootScope.userConnected._id);
+
             if ($rootScope.userConnected.role === 'admin') {
                 $http.post('/getAllUser')
                     .success(function (data) {
@@ -41,10 +41,10 @@ angular.module('projetApp').controller('usersCtrl',
                     }).error(function () {
                         console.log('une erreur');
                     });
-                console.log('admiin');
+
             }
 
-            console.warn('utilisateur courrent 2:', $rootScope.userConnected);
+
         };
 
 
@@ -61,11 +61,10 @@ angular.module('projetApp').controller('usersCtrl',
 
             $scope.newRole.role = $scope.selectedUser;
 
-            console.log($scope.newRole);
             $http.post('/edituser', $scope.newRole)
                 .success(function (data) {
                     console.log('success sign in up');
-                    console.log(data);
+
 
                     $scope.newRole = {};
                     $scope.init();
@@ -79,7 +78,7 @@ angular.module('projetApp').controller('usersCtrl',
             $http.post('/deleteComp', data)
                 .success(function (data) {
                     console.log('success remove');
-                    console.log(data);
+
                     $scope.init();
 
                 })

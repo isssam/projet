@@ -4,12 +4,8 @@ var mongoose = require('mongoose');
 var CUS = mongoose.model('CUS');
 var Complaint = mongoose.model('Complaints');
 
-var fs = require('fs');
 
 exports.addItem = function (req, res) {
-    // console.log(req.files);
-
-//	var complaintData = JSON.parse(req.body.complaintData);
 
     var newComplaint = new Complaint();
     newComplaint.libelle = req.body.libelle;
@@ -61,16 +57,6 @@ exports.addItem = function (req, res) {
 
 exports.remove = function (req, res) {
 
-    /*            Complaint.update({_id: req.body.idComplaint}, {$pull : {cuss : req.body.idCuss}}, function(err, numberAffected){
-     if(err){
-     res.send({
-     'result': 'error'
-     });
-     } else {
-     res.jsonp(200, numberAffected);
-     }
-     });*/
-
     Complaint.findByIdAndRemove(req.body.idComplaint, function (err, complItem) {
             console.warn('tableau', complItem.cuss);
             var listCuss = complItem.cuss;
@@ -96,37 +82,7 @@ exports.remove = function (req, res) {
     );
 
 
-    /*    Complaint.findByIdAndRemove(req.body.idcomp, function (err) {
-     if (err) {
-     res.send({
-     'result': 'error'
-     });
-     } else {
-
-     CUS.update({_id: Complaint._id}, {$pull : {icomplaint : Complaint._id}}, function(err, numberAffected){
-     console.log(numberAffected);
-     if(!err){
-     return console.log('removed compalint id');
-     } else {
-     return console.log(err);
-     }
-     });
-     console.log('Job removed');
-     return res.send('');
-     res.jsonp(200);
-     }
-     });*/
-
-
 }
-/*  Complaint.pre('remove', function(next){
- this.model('CUS').update(
- {idComplaint: this._id},
- {$pull: {idComplaint: this._id}},
- {multi: true},
- next
- );
- });*/
 
 
 /**
@@ -152,7 +108,6 @@ exports.update = function (req, res) {
                         'result': 'error'
                     });
                 } else {
-                    //helpers.journalisation(1, req.user, req._parsedUrl.pathname, JSON.stringify(item));
                     res.jsonp(200, item);
                 }
             });

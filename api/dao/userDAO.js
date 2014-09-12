@@ -46,7 +46,6 @@ exports.remove = function (req, res) {
                         'result': 'error'
                     });
                 } else {
-                    // helpers.journalisation(1, req.user, req._parsedUrl.pathname, JSON.stringify(item));
                     res.jsonp(200);
                 }
             });
@@ -76,7 +75,6 @@ exports.updateRole = function (req, res) {
                         'result': 'error'
                     });
                 } else {
-                    //helpers.journalisation(1, req.user, req._parsedUrl.pathname, JSON.stringify(item));
                     res.jsonp(200, item);
                 }
             });
